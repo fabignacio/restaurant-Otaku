@@ -61,6 +61,28 @@ export class AuthService {
     }
   }
 
+  establecerRol = (index: number) => {
+    let currentRol: string = '';
+    const rol = index;
+
+    switch (rol) {
+      case 1:
+        currentRol = 'Administrador';
+        localStorage.setItem('rol', currentRol);
+        break;
+      case 2:
+        currentRol = 'Cocinero';
+        localStorage.setItem('rol', currentRol);
+        break;
+      case 3:
+        currentRol = 'Mesero';
+        localStorage.setItem('rol', currentRol);
+        break;
+      default:
+        break;
+    }
+  }
+
   logout = () => {
     localStorage.removeItem('token');
   }

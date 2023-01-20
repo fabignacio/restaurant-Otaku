@@ -23,7 +23,7 @@ export class LoginComponent {
   loginFormulario: FormGroup = this.fb.group({
     email: ['example@example.com', [Validators.required, Validators.pattern(this.vs.emailPattern)]],
     password: ['password', [Validators.required]]
-  })
+  });
 
   constructor(
     private fb: FormBuilder,
@@ -57,18 +57,24 @@ export class LoginComponent {
 
     switch (rol) {
       case 1:
+        this.auth.establecerRol(rol);
         this.router.navigateByUrl('/administracion/administrador');
         break;
 
       case 2:
+        this.auth.establecerRol(rol);
         this.router.navigateByUrl('administracion/cocinero');
         break;
+
       case 3:
+        this.auth.establecerRol(rol);
         this.router.navigateByUrl('administracion/mesero');
         break;
 
       default:
         break;
     }
+    return rol;
+
   }
 }
