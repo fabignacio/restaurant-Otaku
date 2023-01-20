@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, of, tap, Observable } from 'rxjs';
 
 import { enviroment } from './../../../../enviroments/enviroment';
-import { AuthResponse, Usuario } from '../interfaces/auth.interface';
+import { AuthResponse, Usuario } from '../../../interfaces/auth.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -28,12 +28,6 @@ export class AuthService {
       .pipe(
         tap(resp => {
           if (resp.ok) {
-            this._user = {
-              uid: resp.uid!,
-              nombre: resp.nombre!,
-              email: resp.email!,
-              rol: resp.rol!
-            }
             this.mantenerUsuario(resp);
           }
         }),

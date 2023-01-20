@@ -10,6 +10,7 @@ Crear usuario
             1.2) Cierre de caja.
             1.3) Proveedores.
             1.4) Graficos con proyeccion de ventas.
+            1.5) Creacion de personal (CRUD)
         2) Cocineros
             2.1) Recetas.
             2.2) Stock de ingredientes.

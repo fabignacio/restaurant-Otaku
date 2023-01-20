@@ -35,7 +35,6 @@ export class LoginComponent {
   }
 
   login = () => {
-    console.log(this.loginFormulario.value);
     const { email, password } = this.loginFormulario.value;
 
     this.auth.login(email, password)

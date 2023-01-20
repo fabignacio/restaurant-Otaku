@@ -47,7 +47,7 @@ export class SidebarComponent {
   }
 
   ingreso = () => {
-    this.router.navigateByUrl('/bienvenido/ingreso')
+    this.router.navigateByUrl('/bienvenido/ingreso');
   }
 }
 
