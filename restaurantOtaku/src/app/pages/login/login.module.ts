@@ -5,7 +5,6 @@ import { LoginRoutingModule } from './login-routing.module';
 import { PrimeModule } from '../../prime/prime.module';
 
 import { LoginComponent } from './login/login.component';
-import { RegistroComponent } from './registro/registro.component';
 import { MainComponent } from './main/main.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -14,7 +13,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     LoginComponent,
-    RegistroComponent,
     MainComponent
   ],
   imports: [

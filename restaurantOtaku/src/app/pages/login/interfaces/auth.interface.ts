@@ -5,7 +5,7 @@ export interface AuthResponse {
     nombre?: string,
     apellido?: string,
     email?: string,
-    rol?: string,
+    rol?: number,
     token?: string
 }
 
@@ -13,5 +13,5 @@ export interface Usuario {
     uid: string,
     nombre: string,
     email: string,
-    rol: string
+    rol: number
 }

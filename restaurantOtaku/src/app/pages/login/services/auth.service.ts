@@ -3,40 +3,69 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, of, tap, Observable } from 'rxjs';
 
 import { enviroment } from './../../../../enviroments/enviroment';
+import { AuthResponse, Usuario } from '../interfaces/auth.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private _baseUrl: string = enviroment.baseUrl;
+  private _baseUrl: string = enviroment.baseUrlStaff;
+  private _user!: Usuario;
 
+  get user() {
+    return { ...this._user };
+  }
 
   constructor(private http: HttpClient) { }
 
-  // validarToken = (): Observable<boolean> => {
-  //   const url = `${this._baseUrl}auth/renew`;
-  //   const headers = new HttpHeaders()
-  //     .set('x-token', localStorage.getItem('token') || '');
+  login = (email: string, password: string) => {
 
-  //   return this.http.get<>(url, { headers })
-  //     .pipe(
-  //       map(resp => {
-  //         this.mantenerUsuario(resp);
-  //         return resp.ok;
-  //       }),
-  //       catchError(err => of(false))
-  //     )
-  // }
+    const url = `${this._baseUrl}/ingreso`
+    const body = { email, password }
 
-  // mantenerUsuario = (resp) => {
-  //   localStorage.setItem('token', resp.token!);
-  //   this._user = {
-  //     nombre: resp.nombre!,
-  //     email: resp.email!,
-  //     uid: resp.uid!
-  //   }
-  // }
+    return this.http.post<AuthResponse>(url, body)
+      .pipe(
+        tap(resp => {
+          if (resp.ok) {
+            this._user = {
+              uid: resp.uid!,
+              nombre: resp.nombre!,
+              email: resp.email!,
+              rol: resp.rol!
+            }
+            this.mantenerUsuario(resp);
+          }
+        }),
+        map(valid => valid.ok),
+        catchError(err => of(err.error.msg))
+      )
+  }
+
+  validarToken = (): Observable<boolean> => {
+    const url = `${this._baseUrl}/token`;
+    const headers = new HttpHeaders()
+      .set('x-token', localStorage.getItem('token') || '');
+
+    return this.http.get<AuthResponse>(url, { headers })
+      .pipe(
+        map(resp => {
+          this.mantenerUsuario(resp);
+          return resp.ok;
+        }),
+        catchError(err => of(false))
+      )
+  }
+
+  mantenerUsuario = (resp: AuthResponse) => {
+    localStorage.setItem('token', resp.token!);
+    this._user = {
+      uid: resp.uid!,
+      nombre: resp.nombre!,
+      email: resp.email!,
+      rol: resp.rol!
+    }
+  }
 
   logout = () => {
     localStorage.removeItem('token');

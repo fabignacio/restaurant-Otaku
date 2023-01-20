@@ -12,7 +12,7 @@ const routes: Routes = [
       { path: 'administrador', component: JefeComponent },
       { path: 'cocinero', component: CocineroComponent },
       { path: 'mesero', component: MeseroComponent },
-      { path: '', redirectTo: '' },
+      { path: '**', redirectTo: 'administrador' },
     ]
   }
 ];
