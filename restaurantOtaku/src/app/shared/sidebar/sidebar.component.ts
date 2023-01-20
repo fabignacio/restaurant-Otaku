@@ -15,13 +15,41 @@ export class SidebarComponent {
 
   constructor(
     private router: Router,
-  ) {
+  ) { }
 
-  }
-
-  ngAfterContentInit() {
-    console.log('Hola desde ngAfterContentInit()');
-    this.menuItems();
+  ngOnInit() {
+    this.items = [
+      {
+        label: 'Restaurant Otaku'
+      },
+      {
+        label: 'Menu',
+        icon: 'pi pi-tablet'
+      },
+      {
+        label: 'Reserva',
+        icon: ' pi pi-calendar-plus'
+      },
+      {
+        label: 'Sobre nosotros',
+        icon: 'pi pi-info-circle',
+        items:
+          [
+            {
+              label: 'Contactanos',
+              icon: 'pi pi-phone'
+            },
+            {
+              label: 'Historia',
+              icon: 'pi pi-history'
+            },
+            {
+              label: 'Preguntas frecuentes',
+              icon: 'pi pi-question-circle'
+            }
+          ]
+      }
+    ]
   }
 
   menuItems = (): MenuItem[] => {
