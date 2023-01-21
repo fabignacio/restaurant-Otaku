@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 
 import Swal from 'sweetalert2';
-import { AuthService } from '../../../../services/login/auth.service';
+import { AuthService } from './../../../../shared/services/login/auth.service';
 
 @Component({
   selector: 'app-jefe',

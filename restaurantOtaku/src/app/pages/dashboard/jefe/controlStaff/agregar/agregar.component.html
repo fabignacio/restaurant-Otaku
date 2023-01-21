@@ -1,1 +1,66 @@
-<p>agregar works!</p>
+<form autocomplete="off" [formGroup]="ingresoStaff">
+    <p-fieldset legend="Datos personales" [toggleable]="true">
+        <div class="col" style="justify-content: center;">
+
+            <!-- Rut -->
+            <div class="col">
+                <span class="p-float-label">
+                    <input type="text" pInputText formControlName="rut">
+                    <label>Rut</label>
+                    <button pButton style="margin-left: 10px;" label="Validar" class="p-button-warning p-button-rounded"
+                        icon="pi pi-check" iconPos="right"></button>
+                </span>
+            </div>
+
+            <!-- Nombre Completo -->
+            <div class="row" style="margin-top: 25px">
+                <div class="col" style="display: flex;">
+                    <span class="p-float-label">
+                        <input type="text" pInputText formControlName="nombre">
+                        <label>Nombre</label>
+                    </span>
+                    <span class="p-float-label" style="margin-left: 10px;">
+                        <input type="text" pInputText formControlName="segundoNombre">
+                        <label>Segundo nombre</label>
+                    </span>
+                    <span class="p-float-label" style="margin-left: 10px;">
+                        <input type="text" pInputText formControlName="apellido">
+                        <label>Apellido Paterno</label>
+                    </span>
+                    <span class="p-float-label" style="margin-left: 10px;">
+                        <input type="text" pInputText formControlName="segundoApellido">
+                        <label>Apellido Materno</label>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Estado Civil -->
+            <div class="row" style="margin-top: 25px">
+                <div class="col">
+                    <h3>Estado Civil</h3>
+                    <p-dropdown [options]="estado" formControlName="estadoCivil" name="selectEstadoCivil"
+                        placeholder="Seleccione"></p-dropdown>
+                </div>
+            </div>
+
+        </div>
+    </p-fieldset>
+
+    <p-fieldset legend="Datos Empresariales" [toggleable]="true">
+        <div class="col" style="display: flex;">
+
+        </div>
+    </p-fieldset>
+
+    <p-fieldset legend="Datos Extras" [toggleable]="true">
+        <div class="col" style="display: flex;">
+
+        </div>
+    </p-fieldset>
+
+    <p-fieldset legend="Finalizar Proceso" [toggleable]="true">
+        <div class="col" style="display: flex;">
+
+        </div>
+    </p-fieldset>
+</form>
