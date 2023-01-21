@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { AuthService } from '../services/auth.service';
-import { ValidatorsService } from '../services/validators.service';
+import { AuthService } from '../../../services/login/auth.service';
+import { ValidatorsService } from '../../../services/validators/validators.service';
 
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 
 @Component({

@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { MenuItem, PrimeNGConfig } from 'primeng/api';
+import { Router } from '@angular/router';
+import { MenuItem } from 'primeng/api';
+
+import Swal from 'sweetalert2';
+
+import { AuthService } from '../../../services/login/auth.service';
 
 @Component({
   selector: 'app-jefe',
@@ -10,34 +15,76 @@ import { MenuItem, PrimeNGConfig } from 'primeng/api';
 export class JefeComponent {
 
   items: MenuItem[] = [];
-  visible: boolean = true;
 
-  constructor(private primengConfig: PrimeNGConfig) { }
+  constructor(
+    private auth: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.items = [
       {
-        label: 'File',
-        items: [{
-          label: 'New',
-          icon: 'pi pi-fw pi-plus',
-          items: [
-            { label: 'Project' },
-            { label: 'Other' },
-          ]
-        },
-        { label: 'Open' },
-        { label: 'Quit' }
+        label: 'Control del Staff',
+        icon: 'pi pi-sitemap',
+        items: [
+          {
+            label: 'Agregar nuevo personal',
+            icon: 'pi pi-user-plus'
+          },
+          {
+            label: 'Editar personal',
+            icon: 'pi pi-user-edit',
+          },
+          {
+            label: 'Remover personal',
+            icon: 'pi pi-user-minus'
+          },
+          {
+            label: 'Buscar personal',
+            icon: 'pi pi-search',
+            items: [
+              { label: 'Listar todos', icon: 'pi pi-users' },
+              { label: 'Buscar uno', icon: 'pi pi-user' },
+            ]
+          }
         ]
       },
       {
-        label: 'Edit',
-        icon: 'pi pi-fw pi-pencil',
+        label: 'Control de Proveedores',
+        icon: 'pi pi-truck',
         items: [
-          { label: 'Delete', icon: 'pi pi-fw pi-trash' },
-          { label: 'Refresh', icon: 'pi pi-fw pi-refresh' }
+          {
+            label: 'Agregar nuevo proveedor',
+            icon: 'pi pi-save'
+          },
+          {
+            label: 'Editar proveedor',
+            icon: 'pi pi-pencil'
+          },
+          {
+            label: 'Remover proveedor',
+            icon: 'pi pi-trash'
+          },
+          {
+            label: 'Buscar proveedores',
+            icon: 'pi pi-search',
+            items: [
+              { label: 'Encontrar todos', icon: 'pi pi-search-plus' },
+              { label: 'Buscar uno', icon: 'pi pi-search' },
+            ]
+          },
         ]
       }
-    ];
+    ]
+  }
+
+  logout = () => {
+    this.auth.logout();
+    this.router.navigateByUrl('/');
+    Swal.fire({
+      icon: 'success',
+      title: 'Hasta luego...',
+      text: 'Sesion cerrada',
+    })
   }
 }
