@@ -4,7 +4,8 @@
 
             <!-- Rut -->
             <div class="col">
-                <span class="p-float-label">
+                <h3>Rut del Empleado</h3>
+                <span class="p-float-label" style="margin-top: 30px;">
                     <input type="text" pInputText formControlName="rut">
                     <label>Rut</label>
                     <button pButton style="margin-left: 10px;" label="Validar" class="p-button-warning p-button-rounded"
@@ -13,7 +14,8 @@
             </div>
 
             <!-- Nombre Completo -->
-            <div class="row" style="margin-top: 25px">
+            <div class="row" style="margin-top: 30px">
+                <h3>Nombre del empleado</h3>
                 <div class="col" style="display: flex;">
                     <span class="p-float-label">
                         <input type="text" pInputText formControlName="nombre">
@@ -35,11 +37,41 @@
             </div>
 
             <!-- Estado Civil -->
-            <div class="row" style="margin-top: 25px">
+            <div class="row" style="margin-top: 30px;">
+                <h3>Estado Civil</h3>
+
+                <div class="col" style="display: flex;">
+                    <span>
+                        <p-radioButton id=" radioSoltero" value="Soltero" label="Soltero" formControlName="estadoCivil">
+                        </p-radioButton>
+                    </span>
+                    <span style="margin-left: 20px;">
+                        <p-radioButton id="radioCasado" value="Casado" label="Casado"
+                            formControlName="estadoCivil"></p-radioButton>
+                    </span>
+                    <span style="margin-left: 20px;">
+                        <p-radioButton id="radioUnionC" value="UnionC" label="Union Civil"
+                            formControlName="estadoCivil"></p-radioButton>
+                    </span>
+                    <span style="margin-left: 20px;">
+                        <p-radioButton id="radioDivorciado" value="Divorciado" label="Divorciado"
+                            formControlName="estadoCivil"></p-radioButton>
+                    </span>
+                    <span style="margin-left: 20px;">
+                        <p-radioButton id="radioViudo" value="Viudo" label="Viudo"
+                            formControlName="estadoCivil"></p-radioButton>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Direccion -->
+            <div class="row" style="margin-top: 30px;">
                 <div class="col">
-                    <h3>Estado Civil</h3>
-                    <p-dropdown [options]="estado" formControlName="estadoCivil" name="selectEstadoCivil"
-                        placeholder="Seleccione"></p-dropdown>
+                    <h3>Direccion</h3>
+                    <span class="p-float-label">
+                        <input type="text" pInputText formControlName="direccion">
+                        <label>Direccion</label>
+                    </span>
                 </div>
             </div>
 
