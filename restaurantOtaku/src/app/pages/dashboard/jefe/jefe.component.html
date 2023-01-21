@@ -1,0 +1,16 @@
+<p-splitter [style]="{'height': '1200px'}" [panelSizes]="[10,90]" [minSizes]="[30,0]" styleClass="mb-5">
+    <ng-template pTemplate>
+        <div class="col flex align-items-center justify-content-center" style="display: none;">
+            Panel 1
+        </div>
+    </ng-template>
+    <ng-template pTemplate>
+        <p-splitter layout="vertical" [panelSizes]="[20,80]">
+            <ng-template pTemplate>
+                <div class="col flex align-items-center justify-content-center">
+                    Panel 2
+                </div>
+            </ng-template>
+        </p-splitter>
+    </ng-template>
+</p-splitter>
