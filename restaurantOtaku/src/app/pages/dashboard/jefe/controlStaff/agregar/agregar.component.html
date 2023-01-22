@@ -6,7 +6,7 @@
             <div class="col">
                 <h3>Rut del Empleado</h3>
                 <span class="p-float-label" style="margin-top: 30px;">
-                    <input type="text" pInputText formControlName="rut">
+                    <input type="text" pInputText placeholder="11111111-1" formControlName="rut">
                     <label>Rut</label>
                     <button pButton style="margin-left: 10px;" label="Validar" class="p-button-warning p-button-rounded"
                         icon="pi pi-check" iconPos="right"></button>
@@ -42,7 +42,7 @@
 
                 <div class="col" style="display: flex;">
                     <span>
-                        <p-radioButton id=" radioSoltero" value="Soltero" label="Soltero" formControlName="estadoCivil">
+                        <p-radioButton id="radioSoltero" value="Soltero" label="Soltero" formControlName="estadoCivil">
                         </p-radioButton>
                     </span>
                     <span style="margin-left: 20px;">
@@ -64,8 +64,8 @@
                 </div>
             </div>
 
-            <!-- Direccion -->
-            <div class="row" style="margin-top: 30px;">
+            <!-- Direccion, Telefono, Correo Personal, Fecha Nacimiento -->
+            <div class="row" style="margin-top: 30px; display: flex;">
                 <div class="col">
                     <h3>Direccion</h3>
                     <span class="p-float-label">
@@ -73,20 +73,160 @@
                         <label>Direccion</label>
                     </span>
                 </div>
+                <div class="col" style="margin-left: 30px">
+                    <h3>Telefono</h3>
+                    <span class="p-float-label">
+                        <input type="text" pInputText placeholder="+569 1234 5678" formControlName="telefono">
+                        <label>Telefono</label>
+                    </span>
+                </div>
+                <div class="col" style="margin-left: 30px;">
+                    <h3>Correo personal</h3>
+                    <span class="p-float-label">
+                        <input type="text" pInputText formControlName="correoPersonal">
+                        <label>Correo personal</label>
+                    </span>
+                </div>
+                <div class="col" style="margin-left: 30px;">
+                    <h3>Fecha de nacimiento</h3>
+                    <span class="p-float-label">
+                        <input type="text" pInputText formControlName="fechaNacimiento">
+                        <label>Fecha de nacimiento</label>
+                    </span>
+                </div>
             </div>
-
         </div>
     </p-fieldset>
 
     <p-fieldset legend="Datos Empresariales" [toggleable]="true">
-        <div class="col" style="display: flex;">
+        <div class="col" style="justify-content: center;">
+            <!-- Correo y password -->
+            <div class="row" style="display: flex;">
+                <div class="col">
+                    <h3>Correo Empresa</h3>
+                    <span class="p-float-label">
+                        <input type="text" pInputText formControlName="correoEmpresa">
+                        <label>Correo Empresa</label>
+                    </span>
+                </div>
+                <div class="col" style="margin-left: 30px;">
+                    <h3>Contraseña</h3>
+                    <span class="p-float-label">
+                        <p-password [toggleMask]="true" formControlName="password1">
+                            <ng-template pTemplate="header">
+                                <h5>Elija una contraseña provisoria</h5>
+                            </ng-template>
+                            <ng-template pTemplate="footer">
+                                <p-divider></p-divider>
+                                <p class="mt-2">Sugerencias</p>
+                                <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5;">
+                                    <li>Al menos debe contener una minúscula</li>
+                                    <li>Al menos debe contener una mayúscula</li>
+                                    <li>Al menos debe contener un número</li>
+                                    <li>Mínimo 8 caracteres</li>
+                                </ul>
+                            </ng-template>
+                        </p-password>
+                        <label>Contraseña</label>
+                    </span>
+                </div>
+                <div class="col" style="margin-left: 30px;">
+                    <h3>Confirmar Contraseña</h3>
+                    <span class="p-float-label">
+                        <p-password [feedback]="false" [toggleMask]="true" formControlName="password2"></p-password>
+                        <label>Confirmar contraseña</label>
+                    </span>
+                </div>
+            </div>
 
-        </div>
-    </p-fieldset>
+            <!-- Datos Bancarios -->
+            <div class="row" style="margin-top: 30px; display: flex;">
 
-    <p-fieldset legend="Datos Extras" [toggleable]="true">
-        <div class="col" style="display: flex;">
+                <div class="col">
+                    <h3>Nombre Banco</h3>
+                    <span class="p-float-label">
+                        <input type="text" pInputText formControlName="nombreBanco">
+                        <label>Nombre del banco</label>
+                    </span>
+                </div>
 
+                <div class="col" style="margin-left: 30px;">
+                    <h3>Numero de cuenta</h3>
+                    <span class="p-float-label">
+                        <input type="text" pInputText formControlName="numeroCuenta">
+                        <label>Numero de cuenta</label>
+                    </span>
+                </div>
+
+                <div class="row" style="margin-left: 30px;">
+                    <h3>Tipo de Cuenta</h3>
+                    <div class="col">
+                        <span>
+                            <p-radioButton id="radioVista" value="Vista" label="Cuenta Vista"
+                                formControlName="tipoCuenta">
+                            </p-radioButton>
+                        </span>
+                    </div>
+                    <div class="col" style="margin-top: 10px;">
+                        <span>
+                            <p-radioButton id="radioCorriente" value="Corriente" label="Cuenta Corriente"
+                                formControlName="tipoCuenta">
+                            </p-radioButton>
+                        </span>
+                    </div>
+                    <div class="col" style="margin-top: 10px;">
+                        <span>
+                            <p-radioButton id="radioAhorro" value="Ahorro" label="Cuenta Ahorro"
+                                formControlName="tipoCuenta">
+                            </p-radioButton>
+                        </span>
+                    </div>
+                </div>
+                <div class="col" style="margin-left: 30px;">
+                    <h3>Sueldo del empleado</h3>
+                    <div class="col">
+                        <h4>Sueldo bruto</h4>
+                        <span class="p-float-label">
+                            <input type="text" pInputText formControlName="sueldoBruto">
+                            <label>Sueldo bruto</label>
+                        </span>
+                    </div>
+                </div>
+                <div class="col" style="margin-left: 30px; margin-top: 40px;">
+                    <div class="col">
+                        <h4>Sueldo Liquido</h4>
+                        <span class="p-float-label">
+                            <input type="text" pInputText formControlName="sueldoLiquido">
+                            <label>Sueldo liquido</label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Datos Previsionales-->
+            <div class="row" style="display: flex;">
+                <div class="row">
+                    <div class="col">
+                        <h3>Prevision de salud</h3>
+                        <span>
+                            <p-radioButton id="radioFonasa" value="Fonasa" label="Fonasa"
+                                formControlName="tipoPrevision">
+                            </p-radioButton>
+                        </span>
+                    </div>
+                    <div class="col" style="margin-top: 10px;">
+                        <span>
+                            <p-radioButton id="radioIsapre" value="Isapre" label="Isapre"
+                                formControlName="tipoPrevision">
+                            </p-radioButton>
+                        </span>
+                        <span class="p-float-label" style="margin-top: 20px;">
+                            <input type="text" pInputText formControlName="nombreIsapre">
+                            <label>Nombre de Isapre</label>
+                        </span>
+                    </div>
+                </div>
+            </div>
         </div>
     </p-fieldset>
 
