@@ -23,6 +23,7 @@ import { BuscarUnoPComponent } from './jefe/controlProveedores/buscar/buscar-uno
 import { CocineroComponent } from './cocinero/cocinero.component';
 import { MeseroComponent } from './mesero/mesero.component';
 import { MainComponent } from './main/main.component';
+import { StaffService } from './jefe/services/staff/staff.service';
 
 
 @NgModule({
@@ -47,6 +48,9 @@ import { MainComponent } from './main/main.component';
     ReactiveFormsModule,
     PrimeModule,
     DashboardRoutingModule
+  ],
+  providers: [
+    StaffService
   ]
 })
 export class DashboardModule { }

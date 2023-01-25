@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 
 
 import { ButtonModule } from 'primeng/button';
+import { CalendarModule } from 'primeng/calendar';
 import { CardModule } from 'primeng/card';
 import { CheckboxModule } from 'primeng/checkbox';
 import { DividerModule } from 'primeng/divider';
 import { FieldsetModule } from 'primeng/fieldset';
+import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextModule } from 'primeng/inputtext';
 import { MenubarModule } from 'primeng/menubar';
 import { PanelMenuModule } from 'primeng/panelmenu';
@@ -17,10 +19,12 @@ import { SplitterModule } from 'primeng/splitter';
   declarations: [],
   imports: [
     ButtonModule,
+    CalendarModule,
     CardModule,
     CheckboxModule,
     DividerModule,
     FieldsetModule,
+    InputNumberModule,
     InputTextModule,
     MenubarModule,
     PanelMenuModule,
@@ -30,10 +34,12 @@ import { SplitterModule } from 'primeng/splitter';
   ],
   exports: [
     ButtonModule,
+    CalendarModule,
     CardModule,
     CheckboxModule,
     DividerModule,
     FieldsetModule,
+    InputNumberModule,
     InputTextModule,
     MenubarModule,
     PanelMenuModule,

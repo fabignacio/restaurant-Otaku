@@ -4,7 +4,7 @@ import { catchError, map, of, tap, Observable } from 'rxjs';
 
 
 import { enviroment } from './../../../../enviroments/enviroment';
-import { AuthResponse, Usuario } from './../../../interfaces/auth.interface';
+import { staffRespose, UsuarioLogin } from '../../../interfaces/staff/staff.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ import { AuthResponse, Usuario } from './../../../interfaces/auth.interface';
 export class AuthService {
 
   private _baseUrl: string = enviroment.baseUrlStaff;
-  private _user!: Usuario;
+  private _user!: UsuarioLogin;
 
   get user() {
     return { ...this._user };
@@ -25,7 +25,7 @@ export class AuthService {
     const url = `${this._baseUrl}/ingreso`
     const body = { email, password }
 
-    return this.http.post<AuthResponse>(url, body)
+    return this.http.post<staffRespose>(url, body)
       .pipe(
         tap(resp => {
           if (resp.ok) {
@@ -42,7 +42,7 @@ export class AuthService {
     const headers = new HttpHeaders()
       .set('x-token', localStorage.getItem('token') || '');
 
-    return this.http.get<AuthResponse>(url, { headers })
+    return this.http.get<staffRespose>(url, { headers })
       .pipe(
         map(resp => {
           this.mantenerUsuario(resp);
@@ -52,12 +52,12 @@ export class AuthService {
       )
   }
 
-  mantenerUsuario = (resp: AuthResponse) => {
+  mantenerUsuario = (resp: staffRespose) => {
     localStorage.setItem('token', resp.token!);
     this._user = {
       uid: resp.uid!,
       nombre: resp.nombre!,
-      email: resp.email!,
+      correoEmpresa: resp.correoEmpresa!,
       rol: resp.rol!
     }
   }

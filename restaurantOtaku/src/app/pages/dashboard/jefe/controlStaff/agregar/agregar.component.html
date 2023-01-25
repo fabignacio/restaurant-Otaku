@@ -18,7 +18,7 @@
                 <h3>Nombre del empleado</h3>
                 <div class="col" style="display: flex;">
                     <span class="p-float-label">
-                        <input type="text" pInputText formControlName="nombre" [disabled]="valid">
+                        <input type="text" pInputText formControlName="nombre">
                         <label>Nombre</label>
                     </span>
                     <span class="p-float-label" style="margin-left: 10px;">
@@ -90,7 +90,8 @@
                 <div class="col" style="margin-left: 30px;">
                     <h3>Fecha de nacimiento</h3>
                     <span class="p-float-label">
-                        <input type="text" pInputText formControlName="fechaNacimiento">
+                        <p-calendar [showIcon]="true" inputId="icon" dateFormat="dd-mm-yy"
+                            formControlName="fechaNacimiento"></p-calendar>
                         <label>Fecha de nacimiento</label>
                     </span>
                 </div>
@@ -167,14 +168,6 @@
                     </span>
                 </div>
 
-                <div class="col" style="margin-left: 30px;">
-                    <h3>Numero de cuenta</h3>
-                    <span class="p-float-label">
-                        <input type="text" pInputText formControlName="numeroCuenta">
-                        <label>Numero de cuenta</label>
-                    </span>
-                </div>
-
                 <div class="row" style="margin-left: 30px;">
                     <h3>Tipo de Cuenta</h3>
                     <div class="col">
@@ -199,13 +192,20 @@
                         </span>
                     </div>
                 </div>
+
+                <div class="col" style="margin-left: 30px;">
+                    <h3>Numero de cuenta</h3>
+                    <span class="p-float-label">
+                        <p-inputNumber mode="decimal" formControlName="numeroCuenta" />
+                    </span>
+                </div>
+
                 <div class="col" style="margin-left: 30px;">
                     <h3>Sueldo del empleado</h3>
                     <div class="col">
                         <h4>Sueldo bruto</h4>
                         <span class="p-float-label">
-                            <input type="text" pInputText formControlName="sueldoBruto">
-                            <label>Sueldo bruto</label>
+                            <p-inputNumber mode="decimal" formControlName="sueldoBruto" />
                         </span>
                     </div>
                 </div>
@@ -213,8 +213,7 @@
                     <div class="col">
                         <h4>Sueldo Liquido</h4>
                         <span class="p-float-label">
-                            <input type="text" pInputText formControlName="sueldoLiquido">
-                            <label>Sueldo liquido</label>
+                            <p-inputNumber mode="decimal" formControlName="sueldoLiquido" />
                         </span>
                     </div>
                 </div>
@@ -227,14 +226,14 @@
                         <h3>Prevision de salud</h3>
                         <span>
                             <p-radioButton id="radioFonasa" value="Fonasa" label="Fonasa"
-                                formControlName="tipoPrevision">
+                                formControlName="tipoPrevision" (click)="desactivarIsapre()">
                             </p-radioButton>
                         </span>
                     </div>
                     <div class="col" style="margin-top: 10px;">
                         <span>
                             <p-radioButton id="radioIsapre" value="Isapre" label="Isapre"
-                                formControlName="tipoPrevision">
+                                formControlName="tipoPrevision" (click)="activarIsapre()">
                             </p-radioButton>
                         </span>
                         <span class="p-float-label" style="margin-top: 20px;">
