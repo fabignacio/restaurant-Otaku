@@ -69,7 +69,7 @@ export class StaffService {
     return this.http.post<staffRespose>(url, body)
       .pipe(
         map(valid => valid.ok),
-        catchError(err => of(err.erros.msg))
+        catchError(err => of(err.error.msg))
       )
   }
 }

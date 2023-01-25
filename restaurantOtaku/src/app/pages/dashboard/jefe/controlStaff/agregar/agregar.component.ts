@@ -25,7 +25,7 @@ export class AgregarComponent {
     telefono: ['', [Validators.required]],
     correoPersonal: ['', [Validators.required, Validators.pattern(this.vs.emailPattern)]],
     correoEmpresa: ['', [Validators.required, Validators.pattern(this.vs.emailPattern)]],
-    password1: ['', [Validators.required, Validators.minLength(8)]],
+    password1: ['', [Validators.required, Validators.minLength(8), Validators.pattern(this.vs.passwordPattern)]],
     password2: ['', [Validators.required, Validators.minLength(8)]],
     tipoRol: ['', [Validators.required]],
     nombreBanco: ['', [Validators.required]],
@@ -40,7 +40,6 @@ export class AgregarComponent {
   valid: boolean = false;
   nuevaFecha: string = '';
 
-
   constructor(
     private fb: FormBuilder,
     private staffService: StaffService,
@@ -48,28 +47,7 @@ export class AgregarComponent {
   ) { }
 
   ngOnInit() {
-
-    this.ingresoStaff.get('nombre')?.disable();
-    this.ingresoStaff.get('segundoNombre')?.disable();
-    this.ingresoStaff.get('apellido')?.disable();
-    this.ingresoStaff.get('segundoApellido')?.disable();
-    this.ingresoStaff.get('estadoCivil')?.disable();
-    this.ingresoStaff.get('direccion')?.disable();
-    this.ingresoStaff.get('fechaNacimiento')?.disable();
-    this.ingresoStaff.get('telefono')?.disable();
-    this.ingresoStaff.get('correoPersonal')?.disable();
-    this.ingresoStaff.get('correoEmpresa')?.disable();
-    this.ingresoStaff.get('password1')?.disable();
-    this.ingresoStaff.get('password2')?.disable();
-    this.ingresoStaff.get('tipoRol')?.disable();
-    this.ingresoStaff.get('nombreBanco')?.disable();
-    this.ingresoStaff.get('tipoCuenta')?.disable();
-    this.ingresoStaff.get('numeroCuenta')?.disable();
-    this.ingresoStaff.get('tipoPrevision')?.disable();
-    this.ingresoStaff.get('nombreIsapre')?.disable();
-    this.ingresoStaff.get('sueldoBruto')?.disable();
-    this.ingresoStaff.get('sueldoLiquido')?.disable();
-
+    this.deshabilitarFormulario();
   }
 
   validarRut = () => {
@@ -78,26 +56,7 @@ export class AgregarComponent {
     const valid = this.vs.validarRut(rut);
 
     if (valid) {
-      this.ingresoStaff.get('nombre')?.enable();
-      this.ingresoStaff.get('segundoNombre')?.enable();
-      this.ingresoStaff.get('apellido')?.enable();
-      this.ingresoStaff.get('segundoApellido')?.enable();
-      this.ingresoStaff.get('estadoCivil')?.enable();
-      this.ingresoStaff.get('direccion')?.enable();
-      this.ingresoStaff.get('fechaNacimiento')?.enable();
-      this.ingresoStaff.get('telefono')?.enable();
-      this.ingresoStaff.get('correoPersonal')?.enable();
-      this.ingresoStaff.get('correoEmpresa')?.enable();
-      this.ingresoStaff.get('password1')?.enable();
-      this.ingresoStaff.get('password2')?.enable();
-      this.ingresoStaff.get('tipoRol')?.enable();
-      this.ingresoStaff.get('nombreBanco')?.enable();
-      this.ingresoStaff.get('tipoCuenta')?.enable();
-      this.ingresoStaff.get('numeroCuenta')?.enable();
-      this.ingresoStaff.get('tipoPrevision')?.enable();
-      this.ingresoStaff.get('sueldoBruto')?.enable();
-      this.ingresoStaff.get('sueldoLiquido')?.enable();
-
+      this.activarFormulario();
       Swal.fire({
         icon: 'success',
         title: 'Bien',
@@ -105,25 +64,7 @@ export class AgregarComponent {
       });
 
     } else {
-      this.ingresoStaff.get('nombre')?.disable();
-      this.ingresoStaff.get('segundoNombre')?.disable();
-      this.ingresoStaff.get('apellido')?.disable();
-      this.ingresoStaff.get('segundoApellido')?.disable();
-      this.ingresoStaff.get('estadoCivil')?.disable();
-      this.ingresoStaff.get('direccion')?.disable();
-      this.ingresoStaff.get('fechaNacimiento')?.disable();
-      this.ingresoStaff.get('telefono')?.disable();
-      this.ingresoStaff.get('correoPersonal')?.disable();
-      this.ingresoStaff.get('correoEmpresa')?.disable();
-      this.ingresoStaff.get('password1')?.disable();
-      this.ingresoStaff.get('password2')?.disable();
-      this.ingresoStaff.get('tipoRol')?.disable();
-      this.ingresoStaff.get('nombreBanco')?.disable();
-      this.ingresoStaff.get('tipoCuenta')?.disable();
-      this.ingresoStaff.get('numeroCuenta')?.disable();
-      this.ingresoStaff.get('tipoPrevision')?.disable();
-      this.ingresoStaff.get('sueldoBruto')?.disable();
-      this.ingresoStaff.get('sueldoLiquido')?.disable();
+      this.deshabilitarFormulario();
       Swal.fire('Rut no valido', rut, 'error');
     }
 
@@ -227,7 +168,53 @@ export class AgregarComponent {
     return nuevoRol;
   }
 
+  deshabilitarFormulario = () => {
+    this.ingresoStaff.get('nombre')?.disable();
+    this.ingresoStaff.get('segundoNombre')?.disable();
+    this.ingresoStaff.get('apellido')?.disable();
+    this.ingresoStaff.get('segundoApellido')?.disable();
+    this.ingresoStaff.get('estadoCivil')?.disable();
+    this.ingresoStaff.get('direccion')?.disable();
+    this.ingresoStaff.get('fechaNacimiento')?.disable();
+    this.ingresoStaff.get('telefono')?.disable();
+    this.ingresoStaff.get('correoPersonal')?.disable();
+    this.ingresoStaff.get('correoEmpresa')?.disable();
+    this.ingresoStaff.get('password1')?.disable();
+    this.ingresoStaff.get('password2')?.disable();
+    this.ingresoStaff.get('tipoRol')?.disable();
+    this.ingresoStaff.get('nombreBanco')?.disable();
+    this.ingresoStaff.get('tipoCuenta')?.disable();
+    this.ingresoStaff.get('numeroCuenta')?.disable();
+    this.ingresoStaff.get('tipoPrevision')?.disable();
+    this.ingresoStaff.get('nombreIsapre')?.disable();
+    this.ingresoStaff.get('sueldoBruto')?.disable();
+    this.ingresoStaff.get('sueldoLiquido')?.disable();
+  }
+
+  activarFormulario = () => {
+    this.ingresoStaff.get('nombre')?.enable();
+    this.ingresoStaff.get('segundoNombre')?.enable();
+    this.ingresoStaff.get('apellido')?.enable();
+    this.ingresoStaff.get('segundoApellido')?.enable();
+    this.ingresoStaff.get('estadoCivil')?.enable();
+    this.ingresoStaff.get('direccion')?.enable();
+    this.ingresoStaff.get('fechaNacimiento')?.enable();
+    this.ingresoStaff.get('telefono')?.enable();
+    this.ingresoStaff.get('correoPersonal')?.enable();
+    this.ingresoStaff.get('correoEmpresa')?.enable();
+    this.ingresoStaff.get('password1')?.enable();
+    this.ingresoStaff.get('password2')?.enable();
+    this.ingresoStaff.get('tipoRol')?.enable();
+    this.ingresoStaff.get('nombreBanco')?.enable();
+    this.ingresoStaff.get('tipoCuenta')?.enable();
+    this.ingresoStaff.get('numeroCuenta')?.enable();
+    this.ingresoStaff.get('tipoPrevision')?.enable();
+    this.ingresoStaff.get('sueldoBruto')?.enable();
+    this.ingresoStaff.get('sueldoLiquido')?.enable();
+  }
+
   guardarEmpleado = () => {
+
     if (this.validarPassword()) {
       let fechaNueva: string = this.formatoFecha();
 
@@ -287,6 +274,8 @@ export class AgregarComponent {
               text: 'Nuevo miembro del personal agregado con exito',
             }
           )
+          this.ingresoStaff.reset();
+          this.deshabilitarFormulario();
         } else {
           Swal.fire('Error', value, 'error');
         }
@@ -295,6 +284,11 @@ export class AgregarComponent {
     } else {
       Swal.fire('Las contraseñas ingresadas no son iguales', 'error');
     }
+  }
+
+  limpiarTodo = () => {
+    this.ingresoStaff.reset();
+    this.deshabilitarFormulario();
   }
 
 }

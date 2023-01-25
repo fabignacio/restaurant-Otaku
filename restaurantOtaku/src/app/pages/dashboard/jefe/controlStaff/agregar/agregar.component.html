@@ -8,7 +8,7 @@
                 <span class="p-float-label" style="margin-top: 30px;">
                     <input type="text" pInputText placeholder="11111111-1" formControlName="rut">
                     <label>Rut</label>
-                    <button pButton style="margin-left: 10px;" label="Validar" class="p-button-warning p-button-rounded"
+                    <button pButton style="margin-left: 10px;" label="Validar" class="p-button-info p-button-rounded"
                         icon="pi pi-check" iconPos="right" (click)="validarRut()"></button>
                 </span>
             </div>
@@ -247,9 +247,13 @@
                         class="p-button-success p-button-raised p-button-rounded" label="Guardar empleado"
                         (click)="guardarEmpleado()"></button>
                 </div>
+                <div class="row" style="margin-left: 20px; margin-top: 130px;">
+                    <button pButton type=" submit" icon="pi pi-trash" iconPos="right"
+                        class="p-button-warning p-button-raised p-button-rounded" label="Limpiar todo"
+                        (click)="limpiarTodo()"></button>
+                </div>
             </div>
         </div>
-
 
     </p-fieldset>
 </form>
