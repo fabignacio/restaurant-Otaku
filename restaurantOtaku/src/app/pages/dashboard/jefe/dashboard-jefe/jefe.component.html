@@ -1,7 +1,7 @@
-<p-splitter [style]="{'height': '1000px'}" [panelSizes]="[10,90]" styleClass="mb-5">
+<!-- <p-splitter [style]="{'height': '900px'}" [panelSizes]="[50,150]" styleClass="mb-5">
     <ng-template pTemplate>
         <div class="col flex align-items-center justify-content-center">
-            <p-panelMenu [model]="items" [style]="{'width':'300px'}"></p-panelMenu>
+            <p-panelMenu [model]="items" [style]="{'width':'300px', 'height':'750px'}"></p-panelMenu>
             <p-divider></p-divider>
             <button pButton icon='pi pi-sign-out' class="p-button-raised p-button-rounded" (click)="logout()"></button>
         </div>
@@ -14,5 +14,28 @@
                 </div>
             </ng-template>
         </p-splitter>
+    </ng-template>
+</p-splitter> -->
+
+<!-- <div class="row-6">
+    <div class="col-6">
+        <p-panelMenu [model]="items" [style]="{'width':'300px'}"></p-panelMenu>
+        <p-divider></p-divider>
+        <button pButton icon='pi pi-sign-out' class="p-button-raised p-button-rounded" (click)="logout()"></button>
+    </div>
+    <div class=" col flex align-items-center justify-content-center">
+        <router-outlet></router-outlet>
+    </div>
+</div> -->
+
+
+<p-splitter [style]="{'height': '300px'}" layout="vertical">
+    <ng-template pTemplate>
+        <p-panelMenu [model]="items" [style]="{'width':'300px'}"></p-panelMenu>
+        <p-divider></p-divider>
+        <button pButton icon='pi pi-sign-out' class="p-button-raised p-button-rounded" (click)="logout()"></button>
+    </ng-template>
+    <ng-template pTemplate>
+        <router-outlet></router-outlet>
     </ng-template>
 </p-splitter>

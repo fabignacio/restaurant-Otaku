@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { validateRut } from '@fdograph/rut-utilities';
 
 @Injectable({
   providedIn: 'root'
@@ -10,4 +11,10 @@ export class ValidatorsService {
   public passwordPattern: string = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})";
 
   constructor() { }
+
+  validarRut = (rut: string): boolean => {
+    const valido = validateRut(rut);
+    return valido;
+  }
+
 }

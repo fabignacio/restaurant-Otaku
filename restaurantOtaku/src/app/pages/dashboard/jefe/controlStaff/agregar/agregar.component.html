@@ -9,7 +9,7 @@
                     <input type="text" pInputText placeholder="11111111-1" formControlName="rut">
                     <label>Rut</label>
                     <button pButton style="margin-left: 10px;" label="Validar" class="p-button-warning p-button-rounded"
-                        icon="pi pi-check" iconPos="right"></button>
+                        icon="pi pi-check" iconPos="right" (click)="validarRut()"></button>
                 </span>
             </div>
 
@@ -18,7 +18,7 @@
                 <h3>Nombre del empleado</h3>
                 <div class="col" style="display: flex;">
                     <span class="p-float-label">
-                        <input type="text" pInputText formControlName="nombre">
+                        <input type="text" pInputText formControlName="nombre" [disabled]="valid">
                         <label>Nombre</label>
                     </span>
                     <span class="p-float-label" style="margin-left: 10px;">
@@ -137,6 +137,23 @@
                         <label>Confirmar contraseña</label>
                     </span>
                 </div>
+
+                <div class="col" style="margin-left: 30px;">
+                    <h3>Designe el rol del empleado</h3>
+                    <span>
+                        <p-radioButton id="radioAdministrador" value="Administrador" label="Administrador"
+                            formControlName="tipoRol">
+                        </p-radioButton>
+                    </span>
+                    <span style="margin-left: 20px;">
+                        <p-radioButton id="radioCocinero" value="Cocinero" label="Cocinero" formControlName="tipoRol">
+                        </p-radioButton>
+                    </span>
+                    <span style="margin-left: 20px;">
+                        <p-radioButton id="radioMesero" value="Mesero" label="Mesero" formControlName="tipoRol">
+                        </p-radioButton>
+                    </span>
+                </div>
             </div>
 
             <!-- Datos Bancarios -->
@@ -226,13 +243,14 @@
                         </span>
                     </div>
                 </div>
+                <div class="row" style="margin-left: 700px; margin-top: 130px;">
+                    <button pButton type=" submit" icon="pi pi-user-plus" iconPos="right"
+                        class="p-button-success p-button-raised p-button-rounded" label="Guardar empleado"
+                        (click)="guardarEmpleado()"></button>
+                </div>
             </div>
         </div>
-    </p-fieldset>
 
-    <p-fieldset legend="Finalizar Proceso" [toggleable]="true">
-        <div class="col" style="display: flex;">
 
-        </div>
     </p-fieldset>
 </form>
