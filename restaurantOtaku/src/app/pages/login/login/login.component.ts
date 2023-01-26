@@ -21,8 +21,8 @@ import { ValidatorsService } from './../../../shared/services/validators/validat
 })
 export class LoginComponent {
   loginFormulario: FormGroup = this.fb.group({
-    email: ['example@example.com', [Validators.required, Validators.pattern(this.vs.emailPattern)]],
-    password: ['password', [Validators.required]]
+    correoEmpresa: ['example@example.com', [Validators.required, Validators.pattern(this.vs.emailPattern)]],
+    password1: ['password', [Validators.required]]
   });
 
   constructor(
@@ -35,9 +35,9 @@ export class LoginComponent {
   }
 
   login = () => {
-    const { email, password } = this.loginFormulario.value;
+    const { correoEmpresa, password1 } = this.loginFormulario.value;
 
-    this.auth.login(email, password)
+    this.auth.login(correoEmpresa, password1)
       .subscribe(value => {
         if (value === true) {
           this.roles();

@@ -20,10 +20,10 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  login = (email: string, password: string) => {
+  login = (correoEmpresa: string, password1: string) => {
 
     const url = `${this._baseUrl}/ingreso`
-    const body = { email, password }
+    const body = { correoEmpresa, password1 }
 
     return this.http.post<staffRespose>(url, body)
       .pipe(

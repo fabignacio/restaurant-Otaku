@@ -6,12 +6,12 @@
             <form [formGroup]="loginFormulario">
                 <div style="justify-content: center;">
                     <span class="p-float-label">
-                        <input type="text" id="inputgroup" pInputText formControlName="email">
+                        <input type="text" id="inputgroup" pInputText formControlName="correoEmpresa">
                         <label for="inputgroup">Email</label>
                     </span>
 
                     <span class="p-float-label" style="margin-top: 2pc">
-                        <p-password formControlName="password" [feedback]="false"></p-password>
+                        <p-password formControlName="password1" [feedback]="false" [toggleMask]="true"></p-password>
                         <label>Contraseña</label>
                     </span>
                 </div>
