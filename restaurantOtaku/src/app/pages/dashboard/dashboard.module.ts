@@ -26,6 +26,9 @@ import { MainComponent } from './main/main.component';
 import { StaffService } from './jefe/services/staff/staff.service';
 
 
+//Pipes
+import { RolPipe } from '../../shared/pipes/rol.pipe';
+
 @NgModule({
   declarations: [
     JefeComponent,
@@ -42,6 +45,8 @@ import { StaffService } from './jefe/services/staff/staff.service';
     EditarProveedorComponent,
     BuscarTodosPComponent,
     BuscarUnoPComponent,
+
+    RolPipe
   ],
   imports: [
     CommonModule,

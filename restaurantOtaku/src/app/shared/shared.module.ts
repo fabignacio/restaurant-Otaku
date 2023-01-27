@@ -4,7 +4,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
-    SidebarComponent
+    SidebarComponent,
   ],
   imports: [
     PrimeModule
