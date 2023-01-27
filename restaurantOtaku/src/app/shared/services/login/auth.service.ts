@@ -4,7 +4,7 @@ import { catchError, map, of, tap, Observable } from 'rxjs';
 
 
 import { enviroment } from './../../../../enviroments/enviroment';
-import { staffRespose, UsuarioLogin } from '../../../interfaces/staff/staff.interface';
+import { staffResponse, UsuarioLogin } from '../../../interfaces/staff/staff.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +25,7 @@ export class AuthService {
     const url = `${this._baseUrl}/ingreso`
     const body = { correoEmpresa, password1 }
 
-    return this.http.post<staffRespose>(url, body)
+    return this.http.post<staffResponse>(url, body)
       .pipe(
         tap(resp => {
           if (resp.ok) {
@@ -42,7 +42,7 @@ export class AuthService {
     const headers = new HttpHeaders()
       .set('x-token', localStorage.getItem('token') || '');
 
-    return this.http.get<staffRespose>(url, { headers })
+    return this.http.get<staffResponse>(url, { headers })
       .pipe(
         map(resp => {
           this.mantenerUsuario(resp);
@@ -52,7 +52,7 @@ export class AuthService {
       )
   }
 
-  mantenerUsuario = (resp: staffRespose) => {
+  mantenerUsuario = (resp: staffResponse) => {
     localStorage.setItem('token', resp.token!);
     this._user = {
       uid: resp.uid!,

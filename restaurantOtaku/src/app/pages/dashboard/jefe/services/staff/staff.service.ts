@@ -3,13 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { catchError, map, of, tap, Observable } from 'rxjs';
 
 import { enviroment } from './../../../../../../enviroments/enviroment';
-import { staffRespose } from '../../../../../interfaces/staff/staff.interface';
+import { staffResponse, staffListado } from '../../../../../interfaces/staff/staff.interface';
 
 @Injectable()
 export class StaffService {
 
   private _baseUrl: string = enviroment.baseUrlStaff;
-  private _staff!: staffRespose;
+  private _staff!: staffResponse;
+  private _staffListado: staffListado[] = [];
 
   getStaff() {
     return { ...this._staff };
@@ -66,10 +67,21 @@ export class StaffService {
       nombreIsapre
     };
 
-    return this.http.post<staffRespose>(url, body)
+    return this.http.post<staffResponse>(url, body)
       .pipe(
         map(valid => valid.ok),
         catchError(err => of(err.error.msg))
       )
-  }
+  };
+
+  listadoStaff = (): Observable<staffListado> => {
+    const url = `${this._baseUrl}/listado`;
+
+    return this.http.get<staffListado>(url)
+      .pipe(
+        map(resp => {
+          return resp;
+        })
+      )
+  };
 }

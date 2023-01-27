@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
-import { PrimeModule } from '../../prime/prime.module';
+import { PrimeModule } from '../../shared/prime/prime.module';
 
 import { JefeComponent } from './jefe/dashboard-jefe/jefe.component';
 //Componentes para control de Staff

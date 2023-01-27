@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { LoginRoutingModule } from './login-routing.module';
-import { PrimeModule } from '../../prime/prime.module';
+import { PrimeModule } from '../../shared/prime/prime.module';
 
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';

@@ -14,6 +14,7 @@ import { PanelMenuModule } from 'primeng/panelmenu';
 import { PasswordModule } from 'primeng/password';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { SplitterModule } from 'primeng/splitter';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [],
@@ -30,7 +31,8 @@ import { SplitterModule } from 'primeng/splitter';
     PanelMenuModule,
     RadioButtonModule,
     PasswordModule,
-    SplitterModule
+    SplitterModule,
+    TableModule
   ],
   exports: [
     ButtonModule,
@@ -45,7 +47,8 @@ import { SplitterModule } from 'primeng/splitter';
     PanelMenuModule,
     RadioButtonModule,
     PasswordModule,
-    SplitterModule
+    SplitterModule,
+    TableModule
   ]
 })
 export class PrimeModule { }

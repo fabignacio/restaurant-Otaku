@@ -1,1 +1,117 @@
-<p>buscar-todos works!</p>
+<p-table [value]="personalListado" [rowHover]="true" [rows]="10" [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+    [globalFilterFields]="['name','country.name','representative.name','status']">
+
+    <ng-template pTemplate="caption">
+        <div class="table-header">
+            Lista del personal
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="width: 4rem;">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+            <th pSortableColumn="rut" style="min-width: 14rem;">
+                <div class="flex justify-content-between align-items-center">
+                    Rut
+                    <p-sortIcon field="rut"></p-sortIcon>
+                    <p-columnFilter type="text" field="rut" display="menu" class="ml-auto"></p-columnFilter>
+                </div>
+            </th>
+            <th pSortableColumn="nombre" style="min-width: 14rem;">
+                <div class="flex justify-content-between align-items-center">
+                    Nombre
+                    <p-sortIcon field="nombre"></p-sortIcon>
+                    <p-columnFilter type="text" field="nombre" display="menu" class="ml-auto"></p-columnFilter>
+                </div>
+            </th>
+            <th pSortableColumn="apellido" style="min-width: 14rem;">
+                <div class="flex justify-content-between align-items-center">
+                    Apellido Paterno
+                    <p-sortIcon field="apellido"></p-sortIcon>
+                    <p-columnFilter type="text" field="apellido" display="menu" class="ml-auto"></p-columnFilter>
+                </div>
+            </th>
+            <th pSortableColumn="correoEmpresa" style="min-width: 14rem;">
+                <div class="flex justify-content-between align-items-center">
+                    Correo Empresa
+                    <p-sortIcon field="correoEmpresa"></p-sortIcon>
+                    <p-columnFilter type="text" field="correoEmpresa" display="menu" class="ml-auto"></p-columnFilter>
+                </div>
+            </th>
+            <th pSortableColumn="rol" style="min-width: 14rem;">
+                <div class="flex justify-content-between align-items-center">
+                    Rol
+                    <p-sortIcon field="rol"></p-sortIcon>
+                    <p-columnFilter type="text" field="rol" display="menu" class="ml-auto"></p-columnFilter>
+                </div>
+            </th>
+            <th pSortableColumn="nombreBanco" style="min-width: 14rem;">
+                <div class="flex justify-content-between align-items-center">
+                    Banco
+                    <p-sortIcon field="nombreBanco"></p-sortIcon>
+                    <p-columnFilter type="text" field="nombreBanco" display="menu" class="ml-auto"></p-columnFilter>
+                </div>
+            </th>
+            <th pSortableColumn="tipoCuenta" style="min-width: 14rem;">
+                <div class="flex justify-content-between align-items-center">
+                    Tipo de cuenta
+                    <p-sortIcon field="tipoCuenta"></p-sortIcon>
+                    <p-columnFilter type="text" field="tipoCuenta" display="menu" class="ml-auto"></p-columnFilter>
+                </div>
+            </th>
+            <th pSortableColumn="numeroCuetna" style="min-width: 14rem;">
+                <div class="flex justify-content-between align-items-center">
+                    N° de Cuenta
+                    <p-sortIcon field="numeroCuetna"></p-sortIcon>
+                    <p-columnFilter type="text" field="numeroCuetna" display="menu" class="ml-auto"></p-columnFilter>
+                </div>
+            </th>
+            <th style="width: 5rem"></th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-staff>
+        <tr class="p-selectable=row">
+            <td>
+                <p-tableCheckbox [value]="staff"></p-tableCheckbox>
+            </td>
+            <td>
+                <span class="p-column-title">Rut</span>
+                <span>{{staff.rut}}</span>
+            </td>
+            <td>
+                <span class="p-column-title">Nombre</span>
+                <span>{{staff.nombre}}</span>
+            </td>
+            <td>
+                <span class="p-column-title">Apellido</span>
+                <span>{{staff.apellido}}</span>
+            </td>
+            <td>
+                <span class="p-column-title">Correo Empresa</span>
+                <span>{{staff.correoEmpresa}}</span>
+            </td>
+            <td>
+                <span class="p-column-title">Rol</span>
+                <span>{{staff.rol}}</span>
+            </td>
+            <td>
+                <span class="p-column-title">Banco</span>
+                <span>{{staff.nombreBanco}}</span>
+            </td>
+            <td>
+                <span class="p-column-title">Tipo de cuenta</span>
+                <span>{{staff.tipoCuenta}}</span>
+            </td>
+            <td>
+                <span class="p-column-title">N° de Cuenta</span>
+                <span>{{staff.numeroCuenta}}</span>
+            </td>
+        </tr>
+    </ng-template>
+
+</p-table>

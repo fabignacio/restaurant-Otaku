@@ -1,4 +1,4 @@
-export interface staffRespose {
+export interface staffResponse {
     ok: boolean,
     uid?: string,
     rut?: string,
@@ -30,4 +30,9 @@ export interface UsuarioLogin {
     nombre: string,
     correoEmpresa: string,
     rol: number
+}
+
+export interface staffListado {
+    ok: boolean,
+    staff: [];
 }
