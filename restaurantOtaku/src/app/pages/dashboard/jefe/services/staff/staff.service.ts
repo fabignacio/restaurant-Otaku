@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent } from '@angular/common/http';
 import { catchError, map, of, tap, Observable } from 'rxjs';
 
 import { enviroment } from './../../../../../../enviroments/enviroment';
@@ -84,4 +84,18 @@ export class StaffService {
         })
       )
   };
+
+  eliminarStaff = (rut: string) => {
+    const url = `${this._baseUrl}/eliminar`;
+    const body = { rut };
+
+    return this.http.delete(url, { body })
+  }
+
+  buscarStaff = (rut: string): Observable<staffListado> => {
+    const url = `${this._baseUrl}/buscar/${rut}`;
+
+    return this.http.get<staffListado>(url);
+  }
+
 }

@@ -25,7 +25,7 @@ export class AgregarComponent {
     telefono: ['', [Validators.required]],
     correoPersonal: ['', [Validators.required, Validators.pattern(this.vs.emailPattern)]],
     correoEmpresa: ['', [Validators.required, Validators.pattern(this.vs.emailPattern)]],
-    password1: ['', [Validators.required, Validators.minLength(8), Validators.pattern(this.vs.passwordPattern)]],
+    password1: ['', [Validators.required, Validators.minLength(8)]],
     password2: ['', [Validators.required, Validators.minLength(8)]],
     tipoRol: ['', [Validators.required]],
     nombreBanco: ['', [Validators.required]],

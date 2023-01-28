@@ -22,8 +22,4 @@ export class BuscarTodosComponent {
         this.personalListado = this.listado.staff;
       });
   }
-
-  buscarTodo = () => {
-  }
-
 }
