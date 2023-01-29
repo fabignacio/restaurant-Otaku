@@ -6,6 +6,8 @@ import Swal from 'sweetalert2';
 import { StaffService } from '../../services/staff/staff.service';
 import { ValidatorsService } from '../../../../../shared/services/validators/validators.service';
 
+import { staffListado } from './../../../../../interfaces/staff/staff.interface';
+
 @Component({
   selector: 'app-editar',
   templateUrl: './editar.component.html',
@@ -13,6 +15,10 @@ import { ValidatorsService } from '../../../../../shared/services/validators/val
   ]
 })
 export class EditarComponent {
+
+
+  listado!: staffListado;
+  personalListado: any;
 
   editarStaff: FormGroup = this.fb.group({
     rut: ['', [Validators.required]],
@@ -26,8 +32,8 @@ export class EditarComponent {
     telefono: ['', [Validators.required]],
     correoPersonal: ['', [Validators.required, Validators.pattern(this.vs.emailPattern)]],
     correoEmpresa: ['', [Validators.required, Validators.pattern(this.vs.emailPattern)]],
-    password1: ['', [Validators.required, Validators.minLength(8)]],
-    password2: ['', [Validators.required, Validators.minLength(8)]],
+    password1: [''],
+    password2: [''],
     tipoRol: ['', [Validators.required]],
     nombreBanco: ['', [Validators.required]],
     tipoCuenta: ['', [Validators.required]],
@@ -53,22 +59,17 @@ export class EditarComponent {
 
   /* Validaciones y dar formatos a los datos */
 
-  validarRut = () => {
+  validarRut = (): boolean => {
     const rut = this.editarStaff.get('rut')?.value;
-
     const valid = this.vs.validarRut(rut);
 
     if (valid) {
       this.activarFormulario();
-      Swal.fire({
-        icon: 'success',
-        title: 'Bien',
-        text: 'Rut valido',
-      });
+      return true;
 
     } else {
       this.deshabilitarFormulario();
-      Swal.fire('Rut no valido', rut, 'error');
+      return false;
     }
 
   };
@@ -87,13 +88,13 @@ export class EditarComponent {
   formatoFecha = (): string => {
     let fechaNueva: string = '';
 
-    const fecha: Date = this.editarStaff.get('fechaNacimiento')?.value;
+    const fecha: Date = new Date(this.editarStaff.get('fechaNacimiento')?.value);
 
     const dia: string = fecha.getDate().toString();
     const mes: string = this.nuevoMes(fecha.getMonth());
     const year: string = fecha.getFullYear().toString();
 
-    fechaNueva = dia + ' de ' + mes + ' del ' + year;
+    fechaNueva = dia + '-' + mes + '-' + year;
     return fechaNueva;
   }
 
@@ -102,66 +103,46 @@ export class EditarComponent {
 
     switch (fecha) {
       case 0:
-        mes = 'Enero';
+        mes = '01';
         break;
       case 1:
-        mes = 'Febrero';
+        mes = '02';
         break;
       case 2:
-        mes = 'Marzo';
+        mes = '03';
         break;
       case 3:
-        mes = 'Abril';
+        mes = '04';
         break;
       case 4:
-        mes = 'Mayo';
+        mes = '05';
         break;
       case 5:
-        mes = 'Junio';
+        mes = '06';
         break;
       case 6:
-        mes = 'Julio';
+        mes = '07';
         break;
       case 7:
-        mes = 'Agosto';
+        mes = '08';
         break;
       case 8:
-        mes = 'Septiembre';
+        mes = '09';
         break;
       case 9:
-        mes = 'Octubre';
+        mes = '10';
         break;
       case 10:
-        mes = 'Noviembre';
+        mes = '11';
         break;
       case 11:
-        mes = 'Diciembre';
+        mes = '12';
         break;
       default:
         break;
     }
 
     return mes;
-  };
-
-  asignarRol = (): number => {
-    let nuevoRol: number = 0;
-    const rol: string = this.editarStaff.get('tipoRol')?.value;
-
-    switch (rol) {
-      case 'Administrador':
-        nuevoRol = 1;
-        break;
-      case 'Cocinero':
-        nuevoRol = 2;
-        break;
-      case 'Mesero':
-        nuevoRol = 3;
-        break;
-      default:
-        break;
-    }
-    return nuevoRol;
   };
 
   /* Control de Formulario y sus campos */
@@ -228,14 +209,38 @@ export class EditarComponent {
     this.deshabilitarFormulario();
   };
 
+  cargarDatosFormulario(datosStaff: []) {
+    datosStaff.forEach((data: any) => {
+      this.editarStaff.controls['nombre'].setValue(data.nombre);
+      this.editarStaff.controls['segundoNombre'].setValue(data.segundoNombre);
+      this.editarStaff.controls['apellido'].setValue(data.apellido);
+      this.editarStaff.controls['segundoApellido'].setValue(data.segundoApellido);
+      this.editarStaff.controls['estadoCivil'].setValue(data.estadoCivil);
+      this.editarStaff.controls['direccion'].setValue(data.direccion);
+      let fechaNueva: Date = data.fechaNacimiento;
+      this.editarStaff.controls['fechaNacimiento'].setValue(fechaNueva.toString());
+      this.editarStaff.controls['telefono'].setValue(data.telefono);
+      this.editarStaff.controls['correoPersonal'].setValue(data.correoPersonal);
+      this.editarStaff.controls['correoEmpresa'].setValue(data.correoEmpresa);
+      this.editarStaff.controls['password1'].setValue(data.password1);
+      this.editarStaff.controls['password2'].setValue(data.password2);
+      this.editarStaff.controls['tipoRol'].setValue(data.rol);
+      this.editarStaff.controls['nombreBanco'].setValue(data.nombreBanco);
+      this.editarStaff.controls['tipoCuenta'].setValue(data.tipoCuenta);
+      this.editarStaff.controls['numeroCuenta'].setValue(data.numeroCuenta);
+      this.editarStaff.controls['tipoPrevision'].setValue(data.tipoPrevision);
+      this.editarStaff.controls['nombreIsapre'].setValue(data.nombreIsapre);
+      this.editarStaff.controls['sueldoBruto'].setValue(data.sueldoBruto);
+      this.editarStaff.controls['sueldoLiquido'].setValue(data.sueldoLiquido);
+
+    })
+  }
+
   /* Metodos del servicio */
   editarEmpleado = () => {
 
     if (this.validarPassword()) {
       let fechaNueva: string = this.formatoFecha();
-
-      let nuevoRol: number = this.asignarRol();
-
       const
         {
           rut,
@@ -256,6 +261,7 @@ export class EditarComponent {
           tipoPrevision,
           sueldoBruto,
           sueldoLiquido,
+          tipoRol,
           nombreIsapre
         } = this.editarStaff.value;
 
@@ -279,7 +285,7 @@ export class EditarComponent {
         tipoPrevision,
         sueldoBruto,
         sueldoLiquido,
-        nuevoRol,
+        tipoRol,
         nombreIsapre
       ).subscribe(value => {
         if (value === true) {
@@ -287,7 +293,7 @@ export class EditarComponent {
             {
               icon: 'success',
               title: 'Bien hecho',
-              text: 'Nuevo miembro del personal agregado con exito',
+              text: 'Miembro actualizado correctamente',
             }
           )
           this.editarStaff.reset();
@@ -300,7 +306,33 @@ export class EditarComponent {
     } else {
       Swal.fire('Las contraseñas ingresadas no son iguales', 'error');
     }
-  }
+  };
 
+  buscarUno = () => {
+    const valid = this.validarRut();
+    const rut = this.editarStaff.get('rut')?.value;
+
+    if (valid) {
+
+      this.staffService.buscarStaff(rut).subscribe((staff) => {
+        if (staff.ok) {
+          this.listado = staff;
+          this.personalListado = this.listado.staff;
+          let datosStaff: any = this.personalListado;
+          this.cargarDatosFormulario(datosStaff);
+          Swal.fire({
+            icon: 'success',
+            title: 'Bien',
+            text: 'Trabajador encontrado!',
+          });
+        } else {
+          Swal.fire('Trabajador no encontrado', rut, 'error');
+        }
+      });
+
+    } else {
+      console.log('Adios');
+    }
+  };
 
 }

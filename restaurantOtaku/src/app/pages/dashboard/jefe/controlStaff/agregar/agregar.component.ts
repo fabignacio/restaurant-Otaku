@@ -167,7 +167,7 @@ export class AgregarComponent {
         break;
     }
     return nuevoRol;
-  }
+  };
 
   deshabilitarFormulario = () => {
     this.ingresoStaff.get('nombre')?.disable();

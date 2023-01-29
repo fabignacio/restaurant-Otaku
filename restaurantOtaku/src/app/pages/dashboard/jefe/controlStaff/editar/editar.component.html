@@ -9,9 +9,9 @@
                     <span class="p-float-label" style="margin-top: 30px;">
                         <input type="text" pInputText placeholder="11111111-1" formControlName="rut">
                         <label>Rut</label>
-                        <button pButton style="margin-left: 10px;" label="Validar"
-                            class="p-button-info p-button-rounded" icon="pi pi-check" iconPos="right"
-                            (click)="validarRut()"></button>
+                        <button pButton style="margin-left: 10px;" label="Buscar empleado"
+                            class="p-button-info p-button-rounded" icon="pi pi-search" iconPos="right"
+                            (click)="buscarUno()"></button>
                     </span>
                 </div>
 
@@ -145,17 +145,16 @@
                     <div class="col" style="margin-left: 30px;">
                         <h3>Designe el rol del empleado</h3>
                         <span>
-                            <p-radioButton id="radioAdministrador" value="Administrador" label="Administrador"
+                            <p-radioButton id="radioAdministrador" value="1" label="Administrador"
                                 formControlName="tipoRol">
                             </p-radioButton>
                         </span>
                         <span style="margin-left: 20px;">
-                            <p-radioButton id="radioCocinero" value="Cocinero" label="Cocinero"
-                                formControlName="tipoRol">
+                            <p-radioButton id="radioCocinero" value="2" label="Cocinero" formControlName="tipoRol">
                             </p-radioButton>
                         </span>
                         <span style="margin-left: 20px;">
-                            <p-radioButton id="radioMesero" value="Mesero" label="Mesero" formControlName="tipoRol">
+                            <p-radioButton id="radioMesero" value="3" label="Mesero" formControlName="tipoRol">
                             </p-radioButton>
                         </span>
                     </div>
