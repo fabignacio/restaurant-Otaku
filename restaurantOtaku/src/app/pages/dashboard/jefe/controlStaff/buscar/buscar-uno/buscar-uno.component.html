@@ -1,1 +1,54 @@
-<p>buscar-uno works!</p>
+<p-toast></p-toast>
+
+<div style="margin-top: 30px;">
+    <p-fieldset legend="Buscar trabajador" [toggleable]="true">
+        <form [formGroup]="buscarStaff">
+            <div class="col">
+                <h3>Rut del Empleado</h3>
+                <span class="p-float-label" style="margin-top: 30px;">
+                    <input type="text" pInputText placeholder="11111111-1" formControlName="rut">
+                    <label>Rut</label>
+                    <button pButton style="margin-left: 10px;" label="Buscar" class="p-button-info p-button-rounded"
+                        icon="pi pi-search" iconPos="right" (click)="buscarUno()"></button>
+                </span>
+            </div>
+        </form>
+    </p-fieldset>
+</div>
+
+<div style="margin-top: 30px;" *ngIf="personalListado != undefined; ">
+    <div *ngIf="personalListado.length > 0">
+        <p-fieldset legend="Datos trabajador" [toggleable]="true">
+            <p-table [value]="personalListado" [tableStyle]="{'min-width': '50rem'}">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Rut</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Segundo Apellido</th>
+                        <th>Rol</th>
+                        <th>Correo Empresa</th>
+                        <th>Nombre del Banco</th>
+                        <th>Tipo de Cuenta</th>
+                        <th>Numero de Cuenta</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-staff>
+                    <tr>
+                        <td>{{staff.rut}}</td>
+                        <td>{{staff.nombre}}</td>
+                        <td>{{staff.apellido}}</td>
+                        <td>{{staff.segundoApellido}}</td>
+                        <td>{{staff.correoEmpresa}}</td>
+                        <td>{{staff.rol | asignarRol}}</td>
+                        <td>{{staff.nombreBanco}}</td>
+                        <td>{{staff.tipoCuenta}}</td>
+                        <td>{{staff.numeroCuenta}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </p-fieldset>
+    </div>
+</div>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
