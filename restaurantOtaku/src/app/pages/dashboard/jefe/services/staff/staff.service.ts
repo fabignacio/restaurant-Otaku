@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpEvent } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { catchError, map, of, tap, Observable } from 'rxjs';
 
 import { enviroment } from './../../../../../../enviroments/enviroment';
@@ -10,7 +10,6 @@ export class StaffService {
 
   private _baseUrl: string = enviroment.baseUrlStaff;
   private _staff!: staffResponse;
-  private _staffListado: staffListado[] = [];
 
   getStaff() {
     return { ...this._staff };

@@ -23,7 +23,10 @@ import { BuscarUnoPComponent } from './jefe/controlProveedores/buscar/buscar-uno
 import { CocineroComponent } from './cocinero/cocinero.component';
 import { MeseroComponent } from './mesero/mesero.component';
 import { MainComponent } from './main/main.component';
+
+//Servicios
 import { StaffService } from './jefe/services/staff/staff.service';
+import { ProveedoresService } from './jefe/services/proveedores/proveedores.service';
 
 
 //Pipes
@@ -55,7 +58,8 @@ import { RolPipe } from '../../shared/pipes/rol.pipe';
     DashboardRoutingModule
   ],
   providers: [
-    StaffService
+    StaffService,
+    ProveedoresService
   ]
 })
 export class DashboardModule { }
