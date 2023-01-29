@@ -98,7 +98,8 @@ export class AgregarComponent {
     const mes: string = this.nuevoMes(fecha.getMonth());
     const year: string = fecha.getFullYear().toString();
 
-    return fechaNueva = dia + ' de ' + mes + ' del ' + year;
+    fechaNueva = dia + ' de ' + mes + ' del ' + year;
+    return fechaNueva;
   }
 
   nuevoMes = (fecha: number): string => {

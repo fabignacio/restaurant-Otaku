@@ -1,1 +1,264 @@
-<p>editar works!</p>
+<div style="margin-top: 30px;">
+    <form autocomplete="off" [formGroup]="editarStaff">
+        <p-fieldset legend="Datos personales" [toggleable]="true">
+            <div class="col" style="justify-content: center;">
+
+                <!-- Rut -->
+                <div class="col">
+                    <h3>Rut del Empleado</h3>
+                    <span class="p-float-label" style="margin-top: 30px;">
+                        <input type="text" pInputText placeholder="11111111-1" formControlName="rut">
+                        <label>Rut</label>
+                        <button pButton style="margin-left: 10px;" label="Validar"
+                            class="p-button-info p-button-rounded" icon="pi pi-check" iconPos="right"
+                            (click)="validarRut()"></button>
+                    </span>
+                </div>
+
+                <!-- Nombre Completo -->
+                <div class="row" style="margin-top: 30px">
+                    <h3>Nombre del empleado</h3>
+                    <div class="col" style="display: flex;">
+                        <span class="p-float-label">
+                            <input type="text" pInputText formControlName="nombre">
+                            <label>Nombre</label>
+                        </span>
+                        <span class="p-float-label" style="margin-left: 10px;">
+                            <input type="text" pInputText formControlName="segundoNombre">
+                            <label>Segundo nombre</label>
+                        </span>
+                        <span class="p-float-label" style="margin-left: 10px;">
+                            <input type="text" pInputText formControlName="apellido">
+                            <label>Apellido Paterno</label>
+                        </span>
+                        <span class="p-float-label" style="margin-left: 10px;">
+                            <input type="text" pInputText formControlName="segundoApellido">
+                            <label>Apellido Materno</label>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Estado Civil -->
+                <div class="row" style="margin-top: 30px;">
+                    <h3>Estado Civil</h3>
+
+                    <div class="col" style="display: flex;">
+                        <span>
+                            <p-radioButton id="radioSoltero" value="Soltero" label="Soltero"
+                                formControlName="estadoCivil">
+                            </p-radioButton>
+                        </span>
+                        <span style="margin-left: 20px;">
+                            <p-radioButton id="radioCasado" value="Casado" label="Casado"
+                                formControlName="estadoCivil"></p-radioButton>
+                        </span>
+                        <span style="margin-left: 20px;">
+                            <p-radioButton id="radioUnionC" value="UnionC" label="Union Civil"
+                                formControlName="estadoCivil"></p-radioButton>
+                        </span>
+                        <span style="margin-left: 20px;">
+                            <p-radioButton id="radioDivorciado" value="Divorciado" label="Divorciado"
+                                formControlName="estadoCivil"></p-radioButton>
+                        </span>
+                        <span style="margin-left: 20px;">
+                            <p-radioButton id="radioViudo" value="Viudo" label="Viudo"
+                                formControlName="estadoCivil"></p-radioButton>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Direccion, Telefono, Correo Personal, Fecha Nacimiento -->
+                <div class="row" style="margin-top: 30px; display: flex;">
+                    <div class="col">
+                        <h3>Direccion</h3>
+                        <span class="p-float-label">
+                            <input type="text" pInputText formControlName="direccion">
+                            <label>Direccion</label>
+                        </span>
+                    </div>
+                    <div class="col" style="margin-left: 30px">
+                        <h3>Telefono</h3>
+                        <span class="p-float-label">
+                            <input type="text" pInputText placeholder="+569 1234 5678" formControlName="telefono">
+                            <label>Telefono</label>
+                        </span>
+                    </div>
+                    <div class="col" style="margin-left: 30px;">
+                        <h3>Correo personal</h3>
+                        <span class="p-float-label">
+                            <input type="text" pInputText formControlName="correoPersonal">
+                            <label>Correo personal</label>
+                        </span>
+                    </div>
+                    <div class="col" style="margin-left: 30px;">
+                        <h3>Fecha de nacimiento</h3>
+                        <span class="p-float-label">
+                            <p-calendar [showIcon]="true" inputId="icon" dateFormat="dd-mm-yy"
+                                formControlName="fechaNacimiento"></p-calendar>
+                            <label>Fecha de nacimiento</label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </p-fieldset>
+
+        <p-fieldset legend="Datos Empresariales" [toggleable]="true">
+            <div class="col" style="justify-content: center;">
+                <!-- Correo y password -->
+                <div class="row" style="display: flex;">
+                    <div class="col">
+                        <h3>Correo Empresa</h3>
+                        <span class="p-float-label">
+                            <input type="text" pInputText formControlName="correoEmpresa">
+                            <label>Correo Empresa</label>
+                        </span>
+                    </div>
+                    <div class="col" style="margin-left: 30px;">
+                        <h3>Contraseña</h3>
+                        <span class="p-float-label">
+                            <p-password [toggleMask]="true" formControlName="password1">
+                                <ng-template pTemplate="header">
+                                    <h5>Elija una contraseña provisoria</h5>
+                                </ng-template>
+                                <ng-template pTemplate="footer">
+                                    <p-divider></p-divider>
+                                    <p class="mt-2">Sugerencias</p>
+                                    <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5;">
+                                        <li>Al menos debe contener una minúscula</li>
+                                        <li>Al menos debe contener una mayúscula</li>
+                                        <li>Al menos debe contener un número</li>
+                                        <li>Mínimo 8 caracteres</li>
+                                    </ul>
+                                </ng-template>
+                            </p-password>
+                            <label>Contraseña</label>
+                        </span>
+                    </div>
+                    <div class="col" style="margin-left: 30px;">
+                        <h3>Confirmar Contraseña</h3>
+                        <span class="p-float-label">
+                            <p-password [feedback]="false" [toggleMask]="true" formControlName="password2"></p-password>
+                            <label>Confirmar contraseña</label>
+                        </span>
+                    </div>
+
+                    <div class="col" style="margin-left: 30px;">
+                        <h3>Designe el rol del empleado</h3>
+                        <span>
+                            <p-radioButton id="radioAdministrador" value="Administrador" label="Administrador"
+                                formControlName="tipoRol">
+                            </p-radioButton>
+                        </span>
+                        <span style="margin-left: 20px;">
+                            <p-radioButton id="radioCocinero" value="Cocinero" label="Cocinero"
+                                formControlName="tipoRol">
+                            </p-radioButton>
+                        </span>
+                        <span style="margin-left: 20px;">
+                            <p-radioButton id="radioMesero" value="Mesero" label="Mesero" formControlName="tipoRol">
+                            </p-radioButton>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Datos Bancarios -->
+                <div class="row" style="margin-top: 30px; display: flex;">
+
+                    <div class="col">
+                        <h3>Nombre Banco</h3>
+                        <span class="p-float-label">
+                            <input type="text" pInputText formControlName="nombreBanco">
+                            <label>Nombre del banco</label>
+                        </span>
+                    </div>
+
+                    <div class="row" style="margin-left: 30px;">
+                        <h3>Tipo de Cuenta</h3>
+                        <div class="col">
+                            <span>
+                                <p-radioButton id="radioVista" value="Vista" label="Cuenta Vista"
+                                    formControlName="tipoCuenta">
+                                </p-radioButton>
+                            </span>
+                        </div>
+                        <div class="col" style="margin-top: 10px;">
+                            <span>
+                                <p-radioButton id="radioCorriente" value="Corriente" label="Cuenta Corriente"
+                                    formControlName="tipoCuenta">
+                                </p-radioButton>
+                            </span>
+                        </div>
+                        <div class="col" style="margin-top: 10px;">
+                            <span>
+                                <p-radioButton id="radioAhorro" value="Ahorro" label="Cuenta Ahorro"
+                                    formControlName="tipoCuenta">
+                                </p-radioButton>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="col" style="margin-left: 30px;">
+                        <h3>Numero de cuenta</h3>
+                        <span class="p-float-label">
+                            <p-inputNumber mode="decimal" formControlName="numeroCuenta" />
+                        </span>
+                    </div>
+
+                    <div class="col" style="margin-left: 30px;">
+                        <h3>Sueldo del empleado</h3>
+                        <div class="col">
+                            <h4>Sueldo bruto</h4>
+                            <span class="p-float-label">
+                                <p-inputNumber mode="decimal" formControlName="sueldoBruto" />
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col" style="margin-left: 30px; margin-top: 40px;">
+                        <div class="col">
+                            <h4>Sueldo Liquido</h4>
+                            <span class="p-float-label">
+                                <p-inputNumber mode="decimal" formControlName="sueldoLiquido" />
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Datos Previsionales-->
+                <div class="row" style="display: flex;">
+                    <div class="row">
+                        <div class="col">
+                            <h3>Prevision de salud</h3>
+                            <span>
+                                <p-radioButton id="radioFonasa" value="Fonasa" label="Fonasa"
+                                    formControlName="tipoPrevision" (click)="desactivarIsapre()">
+                                </p-radioButton>
+                            </span>
+                        </div>
+                        <div class="col" style="margin-top: 10px;">
+                            <span>
+                                <p-radioButton id="radioIsapre" value="Isapre" label="Isapre"
+                                    formControlName="tipoPrevision" (click)="activarIsapre()">
+                                </p-radioButton>
+                            </span>
+                            <span class="p-float-label" style="margin-top: 20px;">
+                                <input type="text" pInputText formControlName="nombreIsapre">
+                                <label>Nombre de Isapre</label>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-left: 700px; margin-top: 130px;">
+                        <button pButton type=" submit" icon="pi pi-user-plus" iconPos="right"
+                            class="p-button-success p-button-raised p-button-rounded" label="Guardar empleado"
+                            (click)="editarEmpleado()"></button>
+                    </div>
+                    <div class="row" style="margin-left: 20px; margin-top: 130px;">
+                        <button pButton type=" submit" icon="pi pi-trash" iconPos="right"
+                            class="p-button-warning p-button-raised p-button-rounded" label="Limpiar todo"
+                            (click)="limpiarTodo()"></button>
+                    </div>
+                </div>
+            </div>
+
+        </p-fieldset>
+    </form>
+</div>
