@@ -71,83 +71,12 @@ export class AgregarComponent {
 
   };
 
-  validarPassword = (): boolean => {
-    const pass1 = this.ingresoStaff.get('password1')?.value;
-    const pass2 = this.ingresoStaff.get('password2')?.value;
-
-    if (pass1 === pass2) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
   desactivarIsapre = () => {
     this.ingresoStaff.get('nombreIsapre')?.disable();
   };
 
   activarIsapre = () => {
     this.ingresoStaff.get('nombreIsapre')?.enable();
-  };
-
-  formatoFecha = (): string => {
-    let fechaNueva: string = '';
-
-    const fecha: Date = this.ingresoStaff.get('fechaNacimiento')?.value;
-
-    const dia: string = fecha.getDate().toString();
-    const mes: string = this.nuevoMes(fecha.getMonth());
-    const year: string = fecha.getFullYear().toString();
-
-    fechaNueva = dia + ' de ' + mes + ' del ' + year;
-    return fechaNueva;
-  };
-
-  nuevoMes = (fecha: number): string => {
-    let mes = '';
-
-    switch (fecha) {
-      case 0:
-        mes = 'Enero';
-        break;
-      case 1:
-        mes = 'Febrero';
-        break;
-      case 2:
-        mes = 'Marzo';
-        break;
-      case 3:
-        mes = 'Abril';
-        break;
-      case 4:
-        mes = 'Mayo';
-        break;
-      case 5:
-        mes = 'Junio';
-        break;
-      case 6:
-        mes = 'Julio';
-        break;
-      case 7:
-        mes = 'Agosto';
-        break;
-      case 8:
-        mes = 'Septiembre';
-        break;
-      case 9:
-        mes = 'Octubre';
-        break;
-      case 10:
-        mes = 'Noviembre';
-        break;
-      case 11:
-        mes = 'Diciembre';
-        break;
-      default:
-        break;
-    }
-
-    return mes;
   };
 
   asignarRol = (): number => {
@@ -221,24 +150,54 @@ export class AgregarComponent {
   };
 
   guardarEmpleado = () => {
+    const fechaFormulario: Date = this.ingresoStaff.get('fechaNacimiento')?.value;
+
+    let fechaNueva: string = this.vs.formatoFecha(fechaFormulario);
+
+    const pass1 = this.ingresoStaff.get('password1')?.value;
+    const pass2 = this.ingresoStaff.get('password2')?.value;
 
     if (this.validarRut()) {
 
-      if (this.validarPassword()) {
-        let fechaNueva: string = this.formatoFecha();
+      if (fechaNueva.length > 0) {
+        if (this.vs.validarPassword(pass1, pass2)) {
 
-        let nuevoRol: number = this.asignarRol();
 
-        let rut: string = this.formatearRut();
+          let nuevoRol: number = this.asignarRol();
 
-        const
-          {
+          let rut: string = this.formatearRut();
+
+          const
+            {
+              nombre,
+              segundoNombre,
+              apellido,
+              segundoApellido,
+              estadoCivil,
+              direccion,
+              telefono,
+              correoPersonal,
+              correoEmpresa,
+              password1,
+              password2,
+              nombreBanco,
+              tipoCuenta,
+              numeroCuenta,
+              tipoPrevision,
+              sueldoBruto,
+              sueldoLiquido,
+              nombreIsapre
+            } = this.ingresoStaff.value;
+
+          this.staffService.ingresoStaff(
+            rut,
             nombre,
             segundoNombre,
             apellido,
             segundoApellido,
             estadoCivil,
             direccion,
+            fechaNueva,
             telefono,
             correoPersonal,
             correoEmpresa,
@@ -250,53 +209,31 @@ export class AgregarComponent {
             tipoPrevision,
             sueldoBruto,
             sueldoLiquido,
+            nuevoRol,
             nombreIsapre
-          } = this.ingresoStaff.value;
+          ).subscribe(value => {
+            if (value === true) {
+              Swal.fire(
+                {
+                  icon: 'success',
+                  title: 'Bien hecho',
+                  text: 'Nuevo miembro del personal agregado con exito',
+                }
+              )
+              this.ingresoStaff.reset();
+              this.deshabilitarFormulario();
+            } else {
+              Swal.fire('Error', value, 'error');
+            }
+          });
 
-        this.staffService.ingresoStaff(
-          rut,
-          nombre,
-          segundoNombre,
-          apellido,
-          segundoApellido,
-          estadoCivil,
-          direccion,
-          fechaNueva,
-          telefono,
-          correoPersonal,
-          correoEmpresa,
-          password1,
-          password2,
-          nombreBanco,
-          tipoCuenta,
-          numeroCuenta,
-          tipoPrevision,
-          sueldoBruto,
-          sueldoLiquido,
-          nuevoRol,
-          nombreIsapre
-        ).subscribe(value => {
-          if (value === true) {
-            Swal.fire(
-              {
-                icon: 'success',
-                title: 'Bien hecho',
-                text: 'Nuevo miembro del personal agregado con exito',
-              }
-            )
-            this.ingresoStaff.reset();
-            this.deshabilitarFormulario();
-          } else {
-            Swal.fire('Error', value, 'error');
-          }
-        });
-
+        } else {
+          Swal.fire('Error', 'Las contraseñas ingresadas no son iguales', 'error');
+        };
       } else {
-        Swal.fire('Las contraseñas ingresadas no son iguales', 'error');
+        Swal.fire('Error', 'El empleado es menor de edad', 'error');
       }
-    } else {
-      Swal.fire('Revise el rut', 'error');
-    }
+    };
   };
 
   limpiarTodo = () => {

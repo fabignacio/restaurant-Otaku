@@ -74,75 +74,9 @@ export class EditarComponent {
 
   };
 
-  validarPassword = (): boolean => {
-    const pass1 = this.editarStaff.get('password1')?.value;
-    const pass2 = this.editarStaff.get('password2')?.value;
-
-    if (pass1 === pass2) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
-  formatoFecha = (): string => {
-    let fechaNueva: string = '';
-
-    const fecha: Date = new Date(this.editarStaff.get('fechaNacimiento')?.value);
-
-    const dia: string = fecha.getDate().toString();
-    const mes: string = this.nuevoMes(fecha.getMonth());
-    const year: string = fecha.getFullYear().toString();
-
-    fechaNueva = dia + '-' + mes + '-' + year;
-    return fechaNueva;
-  }
-
-  nuevoMes = (fecha: number): string => {
-    let mes = '';
-
-    switch (fecha) {
-      case 0:
-        mes = '01';
-        break;
-      case 1:
-        mes = '02';
-        break;
-      case 2:
-        mes = '03';
-        break;
-      case 3:
-        mes = '04';
-        break;
-      case 4:
-        mes = '05';
-        break;
-      case 5:
-        mes = '06';
-        break;
-      case 6:
-        mes = '07';
-        break;
-      case 7:
-        mes = '08';
-        break;
-      case 8:
-        mes = '09';
-        break;
-      case 9:
-        mes = '10';
-        break;
-      case 10:
-        mes = '11';
-        break;
-      case 11:
-        mes = '12';
-        break;
-      default:
-        break;
-    }
-
-    return mes;
+  formatoRut = (): string => {
+    let rut: string = this.editarStaff.get('rut')?.value;
+    return rut = this.vs.formatoRut(rut);
   };
 
   /* Control de Formulario y sus campos */
@@ -234,83 +168,101 @@ export class EditarComponent {
       this.editarStaff.controls['sueldoLiquido'].setValue(data.sueldoLiquido);
 
     })
-  }
+  };
 
-  /* Metodos del servicio */
+  /* Metodos que interactuan con BD */
   editarEmpleado = () => {
 
-    if (this.validarPassword()) {
-      let fechaNueva: string = this.formatoFecha();
-      const
-        {
-          rut,
-          nombre,
-          segundoNombre,
-          apellido,
-          segundoApellido,
-          estadoCivil,
-          direccion,
-          telefono,
-          correoPersonal,
-          correoEmpresa,
-          password1,
-          password2,
-          nombreBanco,
-          tipoCuenta,
-          numeroCuenta,
-          tipoPrevision,
-          sueldoBruto,
-          sueldoLiquido,
-          tipoRol,
-          nombreIsapre
-        } = this.editarStaff.value;
+    const fechaFormulario: Date = this.editarStaff.get('fechaNacimiento')?.value;
 
-      this.staffService.editarStaff(
-        rut,
-        nombre,
-        segundoNombre,
-        apellido,
-        segundoApellido,
-        estadoCivil,
-        direccion,
-        fechaNueva,
-        telefono,
-        correoPersonal,
-        correoEmpresa,
-        password1,
-        password2,
-        nombreBanco,
-        tipoCuenta,
-        numeroCuenta,
-        tipoPrevision,
-        sueldoBruto,
-        sueldoLiquido,
-        tipoRol,
-        nombreIsapre
-      ).subscribe(value => {
-        if (value === true) {
-          Swal.fire(
+    let fechaNueva: string = this.vs.formatoFecha(fechaFormulario);
+
+    const pass1 = this.editarStaff.get('password1')?.value;
+    const pass2 = this.editarStaff.get('password2')?.value;
+
+    if (this.validarRut()) {
+
+      if (fechaNueva.length > 0) {
+
+        if (this.vs.validarPassword(pass1, pass2)) {
+
+          const rut = this.formatoRut();
+
+          const
             {
-              icon: 'success',
-              title: 'Bien hecho',
-              text: 'Miembro actualizado correctamente',
-            }
-          )
-          this.editarStaff.reset();
-          this.deshabilitarFormulario();
-        } else {
-          Swal.fire('Error', value, 'error');
-        }
-      });
+              nombre,
+              segundoNombre,
+              apellido,
+              segundoApellido,
+              estadoCivil,
+              direccion,
+              telefono,
+              correoPersonal,
+              correoEmpresa,
+              password1,
+              password2,
+              nombreBanco,
+              tipoCuenta,
+              numeroCuenta,
+              tipoPrevision,
+              sueldoBruto,
+              sueldoLiquido,
+              tipoRol,
+              nombreIsapre
+            } = this.editarStaff.value;
 
-    } else {
-      Swal.fire('Las contraseñas ingresadas no son iguales', 'error');
+          this.staffService.editarStaff(
+            rut,
+            nombre,
+            segundoNombre,
+            apellido,
+            segundoApellido,
+            estadoCivil,
+            direccion,
+            fechaNueva,
+            telefono,
+            correoPersonal,
+            correoEmpresa,
+            password1,
+            password2,
+            nombreBanco,
+            tipoCuenta,
+            numeroCuenta,
+            tipoPrevision,
+            sueldoBruto,
+            sueldoLiquido,
+            tipoRol,
+            nombreIsapre
+          ).subscribe(value => {
+            if (value === true) {
+              Swal.fire(
+                {
+                  icon: 'success',
+                  title: 'Bien hecho',
+                  text: 'Miembro actualizado correctamente',
+                }
+              );
+              this.editarStaff.reset();
+              this.deshabilitarFormulario();
+            } else {
+              Swal.fire('Error', value, 'error');
+            }
+          });
+
+        } else {
+          Swal.fire('Error', 'Las contraseñas ingresadas no son iguales', 'error');
+        }
+      } else {
+        Swal.fire('Error', 'El empleado es menor de edad', 'error');
+      }
     }
-  };
+
+  }
+
 
   buscarUno = () => {
     const valid = this.validarRut();
-    const rut = this.editarStaff.get('rut')?.value;
+    const rut = this.formatoRut();
 
     if (valid) {
 
@@ -336,3 +288,4 @@ export class EditarComponent {
   };
 
 }
+
