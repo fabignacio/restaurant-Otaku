@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { validateRut } from '@fdograph/rut-utilities';
+import { validateRut, RutFormat, formatRut } from '@fdograph/rut-utilities';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,10 @@ export class ValidatorsService {
   validarRut = (rut: string): boolean => {
     const valido = validateRut(rut);
     return valido;
-  }
+  };
 
+  formatoRut = (rut: string): string => {
+    const rutFormateado: string = (formatRut(rut, RutFormat.DOTS_DASH));
+    return rutFormateado;
+  }
 }

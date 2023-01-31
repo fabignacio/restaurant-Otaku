@@ -48,10 +48,10 @@ export class AgregarComponent {
 
   ngOnInit() {
     this.deshabilitarFormulario();
-  }
+  };
 
-  validarRut = () => {
-    const rut = this.ingresoStaff.get('rut')?.value;
+  validarRut = (): boolean => {
+    let rut = this.ingresoStaff.get('rut')?.value;
 
     const valid = this.vs.validarRut(rut);
 
@@ -62,13 +62,14 @@ export class AgregarComponent {
         title: 'Bien',
         text: 'Rut valido',
       });
-
+      return valid;
     } else {
       this.deshabilitarFormulario();
       Swal.fire('Rut no valido', rut, 'error');
+      return valid;
     }
 
-  }
+  };
 
   validarPassword = (): boolean => {
     const pass1 = this.ingresoStaff.get('password1')?.value;
@@ -79,15 +80,15 @@ export class AgregarComponent {
     } else {
       return false;
     }
-  }
+  };
 
   desactivarIsapre = () => {
     this.ingresoStaff.get('nombreIsapre')?.disable();
-  }
+  };
 
   activarIsapre = () => {
     this.ingresoStaff.get('nombreIsapre')?.enable();
-  }
+  };
 
   formatoFecha = (): string => {
     let fechaNueva: string = '';
@@ -100,7 +101,7 @@ export class AgregarComponent {
 
     fechaNueva = dia + ' de ' + mes + ' del ' + year;
     return fechaNueva;
-  }
+  };
 
   nuevoMes = (fecha: number): string => {
     let mes = '';
@@ -147,7 +148,7 @@ export class AgregarComponent {
     }
 
     return mes;
-  }
+  };
 
   asignarRol = (): number => {
     let nuevoRol: number = 0;
@@ -167,6 +168,11 @@ export class AgregarComponent {
         break;
     }
     return nuevoRol;
+  };
+
+  formatearRut = (): string => {
+    let rut: string = this.ingresoStaff.get('rut')?.value;
+    return rut = this.vs.formatoRut(rut);
   };
 
   deshabilitarFormulario = () => {
@@ -190,7 +196,7 @@ export class AgregarComponent {
     this.ingresoStaff.get('nombreIsapre')?.disable();
     this.ingresoStaff.get('sueldoBruto')?.disable();
     this.ingresoStaff.get('sueldoLiquido')?.disable();
-  }
+  };
 
   activarFormulario = () => {
     this.ingresoStaff.get('nombre')?.enable();
@@ -212,17 +218,42 @@ export class AgregarComponent {
     this.ingresoStaff.get('tipoPrevision')?.enable();
     this.ingresoStaff.get('sueldoBruto')?.enable();
     this.ingresoStaff.get('sueldoLiquido')?.enable();
-  }
+  };
 
   guardarEmpleado = () => {
 
-    if (this.validarPassword()) {
-      let fechaNueva: string = this.formatoFecha();
+    if (this.validarRut()) {
 
-      let nuevoRol: number = this.asignarRol();
+      if (this.validarPassword()) {
+        let fechaNueva: string = this.formatoFecha();
 
-      const
-        {
+        let nuevoRol: number = this.asignarRol();
+
+        let rut: string = this.formatearRut();
+
+        const
+          {
+            nombre,
+            segundoNombre,
+            apellido,
+            segundoApellido,
+            estadoCivil,
+            direccion,
+            telefono,
+            correoPersonal,
+            correoEmpresa,
+            password1,
+            password2,
+            nombreBanco,
+            tipoCuenta,
+            numeroCuenta,
+            tipoPrevision,
+            sueldoBruto,
+            sueldoLiquido,
+            nombreIsapre
+          } = this.ingresoStaff.value;
+
+        this.staffService.ingresoStaff(
           rut,
           nombre,
           segundoNombre,
@@ -230,6 +261,7 @@ export class AgregarComponent {
           segundoApellido,
           estadoCivil,
           direccion,
+          fechaNueva,
           telefono,
           correoPersonal,
           correoEmpresa,
@@ -241,51 +273,31 @@ export class AgregarComponent {
           tipoPrevision,
           sueldoBruto,
           sueldoLiquido,
+          nuevoRol,
           nombreIsapre
-        } = this.ingresoStaff.value;
+        ).subscribe(value => {
+          if (value === true) {
+            Swal.fire(
+              {
+                icon: 'success',
+                title: 'Bien hecho',
+                text: 'Nuevo miembro del personal agregado con exito',
+              }
+            )
+            this.ingresoStaff.reset();
+            this.deshabilitarFormulario();
+          } else {
+            Swal.fire('Error', value, 'error');
+          }
+        });
 
-      this.staffService.ingresoStaff(
-        rut,
-        nombre,
-        segundoNombre,
-        apellido,
-        segundoApellido,
-        estadoCivil,
-        direccion,
-        fechaNueva,
-        telefono,
-        correoPersonal,
-        correoEmpresa,
-        password1,
-        password2,
-        nombreBanco,
-        tipoCuenta,
-        numeroCuenta,
-        tipoPrevision,
-        sueldoBruto,
-        sueldoLiquido,
-        nuevoRol,
-        nombreIsapre
-      ).subscribe(value => {
-        if (value === true) {
-          Swal.fire(
-            {
-              icon: 'success',
-              title: 'Bien hecho',
-              text: 'Nuevo miembro del personal agregado con exito',
-            }
-          )
-          this.ingresoStaff.reset();
-          this.deshabilitarFormulario();
-        } else {
-          Swal.fire('Error', value, 'error');
-        }
-      });
-
+      } else {
+        Swal.fire('Las contraseñas ingresadas no son iguales', 'error');
+      }
     } else {
-      Swal.fire('Las contraseñas ingresadas no son iguales', 'error');
+      Swal.fire('Revise el rut', 'error');
     }
-  }
+  };
 
   limpiarTodo = () => {
     this.ingresoStaff.reset();
