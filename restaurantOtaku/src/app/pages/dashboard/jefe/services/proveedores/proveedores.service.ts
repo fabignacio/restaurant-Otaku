@@ -20,7 +20,7 @@ export class ProveedoresService {
         tipoProducto: string,
         telefonoContacto: string,
         emailContacto: string
-    ): Observable<ProveedoresResponse> => {
+    ) => {
 
         const url = `${this._baseUrl}/registro-proveedores`;
         const body = {

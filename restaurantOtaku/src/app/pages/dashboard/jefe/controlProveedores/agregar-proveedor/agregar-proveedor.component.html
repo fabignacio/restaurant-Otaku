@@ -1,12 +1,12 @@
 <div style="margin-top: 30px;">
-    <form autocomplete="off">
+    <form autocomplete="off" [formGroup]="ingresoProveedor">
         <p-fieldset legend="Datos Proveedor" [toggleable]="true">
             <div class="col" style="justify-content: center;">
 
                 <div class="col">
                     <h3>Rut del Proveedor</h3>
                     <span class="p-float-label" style="margin-top: 30px">
-                        <input type="text" pInputText placeholder="1111111-1">
+                        <input type="text" pInputText placeholder="1111111-1" formControlName="rutProveedor">
                         <label>Rut</label>
                         <button pButton style="margin-left: 10px;" label="Validar rut"
                             class="p-button-info p-button-rounded" icon="pi pi-check" iconPos="right"></button>
@@ -17,7 +17,7 @@
                     <div class="col" style="justify-content: center;">
                         <h3>Nombre del Proveedor</h3>
                         <span class="p-float-label">
-                            <input type="text" pInputText>
+                            <input type="text" pInputText formControlName="nombreProveedor">
                             <label>Nombre</label>
                         </span>
                     </div>
@@ -25,7 +25,7 @@
                     <div class="col" style="justify-content: center; margin-left: 10px;">
                         <h3>Direccion</h3>
                         <span class="p-float-label">
-                            <input type="text" pInputText>
+                            <input type="text" pInputText formControlName="direccion">
                             <label>Direccion</label>
                         </span>
                     </div>
@@ -33,7 +33,7 @@
                     <div class="col" style="justify-content: center; margin-left: 10px;">
                         <h3>Direccion Comercial</h3>
                         <span class="p-float-label">
-                            <input type="text" pInputText>
+                            <input type="text" pInputText formControlName="direccionComercial">
                             <label>Direccion Comercial</label>
                         </span>
                     </div>
@@ -41,7 +41,7 @@
                     <div class="col" style="justify-content: center; margin-left: 10px;">
                         <h3>Tipo de Producto</h3>
                         <span class="p-float-label">
-                            <input type="text" pInputText>
+                            <input type="text" pInputText formControlName="tipoProducto">
                             <label>Tipo de Producto</label>
                         </span>
                     </div>
@@ -49,7 +49,7 @@
                     <div class="col" style="justify-content: center; margin-left: 10px;">
                         <h3>Telefono de Contacto</h3>
                         <span class="p-float-label">
-                            <input type="text" pInputText>
+                            <input type="text" pInputText formControlName="telefono">
                             <label>Telefono de Contacto</label>
                         </span>
                     </div>
@@ -57,7 +57,7 @@
                     <div class="col" style="justify-content: center; margin-left: 10px;">
                         <h3>Email de Contacto</h3>
                         <span class="p-float-label">
-                            <input type="text" pInputText>
+                            <input type="text" pInputText formControlName="emailContacto">
                             <label>Email de Contacto</label>
                         </span>
                     </div>
@@ -67,11 +67,13 @@
             <div class="col" style="margin-top: 30px; justify-content: left; display: flex;">
                 <div class="row">
                     <button pButton type="submit" icon="pi pi-user-plus" iconPos="right"
-                        class="p-button-success p-button-raised p-button-rounded" label="Guardar Proveedor"></button>
+                        class="p-button-success p-button-raised p-button-rounded" label="Guardar Proveedor"
+                        (click)="guardarProveedor()"></button>
                 </div>
-                <div class="row" style="margin-left: 30px;">
+                <div class=" row" style="margin-left: 30px;">
                     <button pButton icon="pi pi-trash" iconPos="right"
-                        class="p-button-warning p-button-raised p-button-rounded" label="Limpiar todo"></button>
+                        class="p-button-warning p-button-raised p-button-rounded" label="Limpiar todo"
+                        (click)="limpiarTodo()"></button>
                 </div>
             </div>
         </p-fieldset>
