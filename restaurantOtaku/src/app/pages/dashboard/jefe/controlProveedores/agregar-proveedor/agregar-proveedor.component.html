@@ -1,1 +1,79 @@
-<p>agregar-proveedor works!</p>
+<div style="margin-top: 30px;">
+    <form autocomplete="off">
+        <p-fieldset legend="Datos Proveedor" [toggleable]="true">
+            <div class="col" style="justify-content: center;">
+
+                <div class="col">
+                    <h3>Rut del Proveedor</h3>
+                    <span class="p-float-label" style="margin-top: 30px">
+                        <input type="text" pInputText placeholder="1111111-1">
+                        <label>Rut</label>
+                        <button pButton style="margin-left: 10px;" label="Validar rut"
+                            class="p-button-info p-button-rounded" icon="pi pi-check" iconPos="right"></button>
+                    </span>
+                </div>
+
+                <div class="row" style="margin-top: 30px; display: flex;">
+                    <div class="col" style="justify-content: center;">
+                        <h3>Nombre del Proveedor</h3>
+                        <span class="p-float-label">
+                            <input type="text" pInputText>
+                            <label>Nombre</label>
+                        </span>
+                    </div>
+
+                    <div class="col" style="justify-content: center; margin-left: 10px;">
+                        <h3>Direccion</h3>
+                        <span class="p-float-label">
+                            <input type="text" pInputText>
+                            <label>Direccion</label>
+                        </span>
+                    </div>
+
+                    <div class="col" style="justify-content: center; margin-left: 10px;">
+                        <h3>Direccion Comercial</h3>
+                        <span class="p-float-label">
+                            <input type="text" pInputText>
+                            <label>Direccion Comercial</label>
+                        </span>
+                    </div>
+
+                    <div class="col" style="justify-content: center; margin-left: 10px;">
+                        <h3>Tipo de Producto</h3>
+                        <span class="p-float-label">
+                            <input type="text" pInputText>
+                            <label>Tipo de Producto</label>
+                        </span>
+                    </div>
+
+                    <div class="col" style="justify-content: center; margin-left: 10px;">
+                        <h3>Telefono de Contacto</h3>
+                        <span class="p-float-label">
+                            <input type="text" pInputText>
+                            <label>Telefono de Contacto</label>
+                        </span>
+                    </div>
+
+                    <div class="col" style="justify-content: center; margin-left: 10px;">
+                        <h3>Email de Contacto</h3>
+                        <span class="p-float-label">
+                            <input type="text" pInputText>
+                            <label>Email de Contacto</label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" style="margin-top: 30px; justify-content: left; display: flex;">
+                <div class="row">
+                    <button pButton type="submit" icon="pi pi-user-plus" iconPos="right"
+                        class="p-button-success p-button-raised p-button-rounded" label="Guardar Proveedor"></button>
+                </div>
+                <div class="row" style="margin-left: 30px;">
+                    <button pButton icon="pi pi-trash" iconPos="right"
+                        class="p-button-warning p-button-raised p-button-rounded" label="Limpiar todo"></button>
+                </div>
+            </div>
+        </p-fieldset>
+    </form>
+</div>
